@@ -1,27 +1,25 @@
-// import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import axios from "axios";
-
-export const useShowcaseStore = defineStore('showcase', () => {
+// Import axios to make HTTP requests
+import axios from "axios"
+export const useShowcaseStore = defineStore("showcase", {
     state: () => ({
         showcases: [],
     }),
     getters: {
-       getShowcases(state){
+      getShowcases(state){
           return state.showcases
         }
     },
     actions: {
-       async fetchShowcases() {
+      async fetchShowcases() {
         try {
-          const data = await axios.get("./data/list-showcases.json")
-            this.users = data.data
+          const data = await axios.get("./src/data/list-showcases.json")
+            this.showcases = data.data
           }
           catch (error) {
             alert(error)
             console.log(error)
         }
       }
-    }
-
+    },
 })

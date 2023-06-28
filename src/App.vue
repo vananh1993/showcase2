@@ -2,9 +2,9 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-import { useProductStore } from './store/products';
-const productStore = useProductStore()
-productStore.fetchAll()
+// import { useProductStore } from './store/products';
+// const productStore = useProductStore()
+// productStore.fetchAll()
 
 </script>
 
