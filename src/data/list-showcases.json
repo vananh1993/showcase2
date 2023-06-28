@@ -1,7 +1,7 @@
 [
-    { "id": 1, "title": "Button Animation", "category": "text", "description": "Button Animation Button Animation Button Animation", "imgUrl": "150x150.png", "tag": "button, hover", "url": ""},
-    { "id": 2, "title": "List article", "category": "text", "description": "aaaaaaa ádf", "imgUrl": "150x150.png", "tag": "list,article, hover, ", "url": ""},
-    { "id": 3, "title": "Form", "category": "text", "description": "aaaaaaa ádf", "imgUrl": "150x150.png", "tag": "form, submit, input, selectbox", "url": ""},
-    { "id": 4, "title": "Scrollbar", "category": "text", "description": "aaaaaaa ádf", "imgUrl": "150x150.png", "tag": "scroll, scrollbar", "url": ""},
-    { "id": 5, "title": "Custom scroll", "category": "text", "description": "aaaaaaa ádf", "imgUrl": "150x150.png", "tag": "scroll, scrollbar", "url": ""}
+    { "id": 1, "title": "Button Animation", "category": "text", "description": "Button Animation Button Animation Button Animation", "imgUrl": "350x200.png", "tag": "button, hover", "url": ""},
+    { "id": 2, "title": "List article", "category": "text", "description": "aaaaaaa ádf", "imgUrl": "350x200.png", "tag": "list,article, hover, ", "url": ""},
+    { "id": 3, "title": "Form", "category": "text", "description": "aaaaaaa ádf", "imgUrl": "350x200.png", "tag": "form, submit, input, selectbox", "url": ""},
+    { "id": 4, "title": "Scrollbar", "category": "text", "description": "aaaaaaa ádf", "imgUrl": "350x200.png", "tag": "scroll, scrollbar", "url": ""},
+    { "id": 5, "title": "Custom scroll", "category": "text", "description": "aaaaaaa ádf", "imgUrl": "350x200.png", "tag": "scroll, scrollbar", "url": ""}
 ]
