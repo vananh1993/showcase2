@@ -8,6 +8,9 @@ export const useShowcaseStore = defineStore("showcase", {
     getters: {
         getShowcases(state){
             return state.showcases
+        },
+        getShowcaseFromCate(state){
+          return (categoryName) => state.posts.filter((item) => item.category === categoryName)
         }
     },
     actions: {
