@@ -2,11 +2,13 @@
   <div class="container">
     <h1 class="text-center">{{ title }}</h1>
     <div class="row">
-        <div class="col-sm-4 mt-4" v-for="showcases in getShowcases" :key="showcases.id">
-            <div class="">
-                <img src="../assets/thumb-showcase/350x200.png" alt="">
-                <p>{{ showcases.title }}</p>
-            </div>
+        <div class="col-sm-4 mt-4" v-for="showcase in getShowcases" :key="showcase.id">
+            <RouterLink :to="'/showcase/' + showcase.category">
+                <div class="">
+                    <img src="../assets/thumb-showcase/350x200.png" alt="">
+                    <p>{{ showcase.title }}</p>
+                </div>
+            </RouterLink>
         </div>
     </div>
 
@@ -14,6 +16,7 @@
 </template>
 
 <script setup>
+    import { RouterLink } from "vue-router"
     import { ref, onMounted, computed } from "vue";
     import { useShowcaseStore } from "../stores/showcases";
     const store = useShowcaseStore();

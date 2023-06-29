@@ -16,7 +16,7 @@ export const useShowcaseStore = defineStore("showcase", {
     actions: {
         async fetchShowcases() {
             try {
-                const data = await axios.get("./src/data/list-showcases.json")
+                const data = await axios.get("../src/data/list-showcases.json")
                     this.showcases = data.data
                 }
                 catch (error) {
