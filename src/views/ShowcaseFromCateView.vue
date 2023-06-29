@@ -17,9 +17,20 @@ const route = useRoute()
 // console.log(route.params.category);
 // console.log(route.params.category);
 const store = useShowcaseStore();
-const getShowcasesFromCate = computed(() => {
-  return store.fetchShowcases.filter((item) => item.category == route.params.category)
+
+
+const getShowcases = computed(() => {
+  return store.getShowcases.filter((item) => item.category == route.params.category);
 });
+// const showcasess = computed(() => {
+//   return store.showcasess;
+// });
+onMounted(() => {
+  store.fetchShowcases();
+});
+// const getShowcasesFromCate = computed(() => {
+//   return store.fetchShowcases.filter((item) => item.category == route.params.category)
+// });
 
 
 </script>
@@ -28,7 +39,7 @@ const getShowcasesFromCate = computed(() => {
   <div class="container">
     <!-- <h1 class="text-center">{{ title }}</h1> -->
     <div class="row">
-        <div class="col-sm-4 mt-4" v-for="showcases in getShowcasesFromCate" :key="showcases.id">
+        <div class="col-sm-4 mt-4" v-for="showcases in getShowcases" :key="showcases.id">
             <div class="">
                 <img src="../assets/thumb-showcase/350x200.png" alt="">
                 <p>{{ showcases.title }}</p>
