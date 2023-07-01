@@ -2,13 +2,19 @@
   <div class="container">
     <h1 class="text-center">{{ title }}</h1>
     <div class="row">
-        <div class="col-sm-4 mt-4" v-for="showcase in getShowcases" :key="showcase.id">
+        <div class="col-sm-4 mt-4" v-for="showcase in showcases" :key="showcase.id">
             <RouterLink :to="'/showcase/' + showcase.category">
                 <div class="">
-                    <img src="../assets/thumb-showcase/350x200.png" alt="">
-                    <p>{{ showcase.title }}</p>
+                    <img :src="showcase.image" alt="">
+                    <p>{{ showcase.text }}</p>
                 </div>
             </RouterLink>
+
+            <ul>
+                <li v-for="tag in showcase.tags">
+                    <a href="#/">{{ tag }}</a>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -21,9 +27,8 @@
     import { useShowcaseStore } from "../stores/showcases";
     const store = useShowcaseStore();
     const title = ref("List Showcase");
-    const getShowcases = computed(() => {
-      return store.getShowcases;
-    });
+    const showcases = computed(() => store.getShowcases);
+
     // const showcasess = computed(() => {
     //   return store.showcasess;
     // });
