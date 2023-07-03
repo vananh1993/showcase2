@@ -1,0 +1,159 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" type="image/x-icon" href="#">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="format-detection" content="telephone=no">
+
+    
+
+    <link rel="stylesheet" href="assets/css/app.css">
+    
+	<link rel="stylesheet" href="assets/css/profile.css">
+
+
+    
+    <script type="text/javascript" src="assets/misc/jquery/jquery.js"></script>
+    
+</head>
+
+<body>
+    <div class="wrapper" data-module="lazyload detectDevice">
+
+    
+    <!-- ... the rest of the HTML page ... -->
+    
+	<main>
+		
+<nav class="navigator">
+    <div class="navigator__container">
+        <div class="container">
+            <a class="navigator__back" href=""></a>
+            <h1 class="navigator__page-title">Thiết lập tài khoản</h1>
+        </div>
+    </div>
+</nav>
+
+		<section class="s-profile block-max-width" >
+			<div class="s-profile__screen">
+				<form class="form-common -fixed form-validate-profile" onsubmit="return;">
+					
+					
+					
+					
+					<div class="form-common__group">
+						<label>Số điện thoại <span class="color-red">*</span></label>
+						
+							<input type="tel" name="phone" placeholder="Nhập số điện thoại">
+						
+					</div>
+					<div class="form-common__group">
+						<label>Họ và tên <span class="color-red">*</span></label>
+						<input type="text" name="fullname" placeholder="Nhập họ tên" value="">
+					</div>
+					<div class="form-common__group">
+						<label>Tên hiển thị <span class="color-red">*</span></label>
+						<input type="text" name="nickname" placeholder="Nhập tên" maxlength="15" value="">
+						<p class="form-common__input-rule">Giới hạn 15 kí tự (kể cả khoảng trắng)</p>
+					</div>
+					<div class="form-common__group">
+						<label>Email</label>
+						<input type="email" name="email" placeholder="Nhập email" value="">
+					</div>
+					<h5 class="form-common__headline">Địa chỉ nhận quà</h5>
+					<div class="form-common__group">
+						<label>Tỉnh/Thành phố</label>
+						<select name="province" class="select_provinces">
+							<option value="">Tỉnh/Thành phố</option>
+							
+						</select>
+					</div>
+					<div class="form-common__group">
+						<label>Quận/Huyện</label>
+						<select name="district" class="select_districts">
+							<option value="">Quận/Huyện</option>
+							
+						</select>
+					</div>
+					<div class="form-common__group">
+						<label>Phường/Xã</label>
+						<select name="ward" class="select_wards">
+							<option value="">Phường/Xã</option>
+							
+						</select>
+					</div>
+					<div class="form-common__group">
+						<label>Địa chỉ</label>
+						<textarea name="address" placeholder="Nhập địa chỉ" rows="2"></textarea>
+					</div>
+
+					<div class="form-common__fixed block-max-width">
+						<p class="form-common__error hidden"></p>
+						<button type="submit" class="btn-common -full">Cập nhật tài khoản</button>
+					</div>
+				</form>
+			</div>
+
+		</section>
+	</main>
+
+    <!-- ... -->
+    <footer></footer>
+
+
+    </div><!--wrapper -->
+
+    
+    
+<div class="popup popup-message" id="popup_message" data-module="popup" >
+    <div class="popup__container">
+        <div class="popup__close js-popup-close"><span></span></div>
+		<div class="popup__content">
+            <header>
+				<h4>Thông báo</h4>
+			</header>
+            <div>
+                
+            </div>
+            
+            <footer>
+                <button class="button-big js-popup-close">ĐÓNG</button>
+            </footer>
+            
+		</div>
+    </div>
+</div>
+
+
+    
+<div class="notification -success" id="notification_success" data-module="notification">
+    <div class="container">
+        <div class="notification__content">
+            Thiết lập tài khoản thành công!
+        </div>
+    </div>
+</div>
+
+
+    <section class="banner-desktop lozad" data-background-image="assets/images/global/banner-desktop.jpg">
+</section>
+
+    
+
+    
+    <script src="assets/js/runtime.js"></script>
+    
+    <script src="assets/js/vendor.js"></script>
+    <script src="assets/js/app.js"></script>
+
+	
+
+    
+	<script src="assets/js/profile.js"></script>
+
+
+</body>
+
+</html>

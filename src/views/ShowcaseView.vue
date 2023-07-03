@@ -5,8 +5,8 @@
         <div class="col-sm-4 mt-4" v-for="showcase in showcases" :key="showcase.id">
             <RouterLink :to="'/showcase/' + showcase.category">
                 <div class="">
-                    <img :src="showcase.image" alt="">
-                    <p>{{ showcase.text }}</p>
+                    <img src="../assets/thumb-showcase/350x200.png" alt="">
+                    <p>{{ showcase.title }}</p>
                 </div>
             </RouterLink>
 

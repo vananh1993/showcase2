@@ -1,0 +1,208 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" type="image/x-icon" href="#">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="format-detection" content="telephone=no">
+
+    
+
+    <link rel="stylesheet" href="assets/css/app.css">
+    
+	<link rel="stylesheet" href="assets/css/signin.css">
+
+
+    
+    <script type="text/javascript" src="assets/misc/jquery/jquery.js"></script>
+    
+</head>
+
+<body>
+    <div class="wrapper" data-module="lazyload detectDevice">
+
+    
+    <!-- ... the rest of the HTML page ... -->
+    
+
+	<main class="signin block-max-width">
+		<section class="js-signin-main signin__screen-1">
+			<nav class="navigator">
+				<div class="navigator__container">
+					<div class="container">
+						<a class="navigator__back" href=""></a>
+						<div class="signin-navigator">
+							<img class="signin-navigator__text-chinh-phuc" src="assets/images/texts/text-chinh-phuc.png"/>
+							<div class="signin-navigator__logo-sting">
+								<div class="logo-sting">
+									<img class="js-tex-sting lozad" style="opacity : 0" data-src="assets/images/logo.png" src="assets/images/logo.png"/>
+									<div class="glitch-transparent js-glitch-logo"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+			<section class="s-top-banner top-banner block-max-width" data-spec="homeBanner">
+				<div class="top-banner__container">
+					
+					<div class="slogan">
+						<img style="opacity : 0" class="js-tex-slogan lozad" data-src="assets/images/slogan.png" src="assets/images/dummy/648x276.png"/>
+						<div class="glitch-slogan js-glitch-slogan"></div>
+					</div>
+
+					<div class="img-pin">
+						<img src="assets/images/pages/signin/pin.png" />
+					</div>
+				</div>
+			</section>
+
+			<div class="container">
+				<form class="form-common form-validate-login" onsubmit="return;">
+					
+					<h1 class="signin__form-title">Đăng nhập</h1>
+
+					<div class="form-common__group">
+						<label>Số điện thoại của bạn</label>
+						<input type="tel" placeholder="Nhập số điện thoại" name="phone" />
+					</div>
+
+					
+					<button
+						type="submit"
+						class="btn-common -full text-uppercase"
+					>Đăng nhập</button>
+				</form>
+
+				<div class="signin__legend-option">
+					<div><span>Hoặc đăng nhập bằng</span></div>
+				</div>
+
+				<div class="signin__social">
+					<a href="javascript:;">
+						<img src="assets/images/global/signin-google.png" />
+					</a>
+					<a href="javascript:;">
+						<img src="assets/images/global/signin-facebook.png" />
+					</a>
+				</div>
+
+				<div class="signin__option-signup text-center">Bạn chưa có tài khoản? <a href="" class="text-bold text-underline">Đăng ký</a></div>
+			</div>
+		</section>
+
+		<section class="js-signin-otp hide signin__screen-2">
+			<nav class="navigator">
+				<div class="navigator__container">
+					<div class="container">
+						<a class="navigator__back" href="/index.html"></a>
+						<h1 class="navigator__page-title">Đăng nhập</h1>
+					</div>
+				</div>
+			</nav>
+			<div class="container">
+				<form class="form-common form-login" onsubmit="return;">
+					
+					<div class="otp-confirm__message-sent text-center">
+						Mã xác minh đã được gửi đến số <span></span><br />
+						Vui lòng kiểm tra tin nhắn.
+					</div>
+
+					<input type="number" inputmode="numeric" class="otp-confirm__txt-confirm-code" name="temp_otp" />
+					
+						<i>OTP for testing: 567568</i>
+					
+
+					<div class="otp-confirm__error">
+						<div class="form-common__error -inline-block hidden"></div>
+					</div>
+
+					<div class="otp-confirm__resend">
+						Vui lòng chờ 60 giây để <a href="javascript:;">Gửi lại</a>
+					</div>
+
+					<div class="form-common__fixed block-max-width">
+						<button type="submit" class="btn-common text-uppercase -full">Xác nhận</button>
+					</div>
+				</form>
+			</div>
+		</section>
+	</main>
+	
+<div class="popup popup-message" id="popup_register" data-module="popup" >
+    <div class="popup__container">
+        <div class="popup__close js-popup-close"><span></span></div>
+		<div class="popup__content">
+            <header>
+				<h4>Thông báo</h4>
+			</header>
+            <div>
+                Số điện thoại chưa được đăng ký. 
+            </div>
+            <footer>
+                <a href="" class="button-big">ĐĂNG KÝ NGAY</a>
+            </footer>
+		</div>
+    </div>
+</div>
+
+
+    <!-- ... -->
+    <footer></footer>
+
+
+    </div><!--wrapper -->
+
+    
+    
+<div class="popup popup-message" id="popup_message" data-module="popup" >
+    <div class="popup__container">
+        <div class="popup__close js-popup-close"><span></span></div>
+		<div class="popup__content">
+            <header>
+				<h4>Thông báo</h4>
+			</header>
+            <div>
+                
+            </div>
+            
+            <footer>
+                <button class="button-big js-popup-close">ĐÓNG</button>
+            </footer>
+            
+		</div>
+    </div>
+</div>
+
+
+    
+<div class="notification -success" id="notification_success" data-module="notification">
+    <div class="container">
+        <div class="notification__content">
+            Thiết lập tài khoản thành công!
+        </div>
+    </div>
+</div>
+
+
+    <section class="banner-desktop lozad" data-background-image="assets/images/global/banner-desktop.jpg">
+</section>
+
+    
+
+    
+    <script src="assets/js/runtime.js"></script>
+    
+    <script src="assets/js/vendor.js"></script>
+    <script src="assets/js/app.js"></script>
+
+	
+
+    
+	<script src="assets/js/signin.js"></script>
+
+
+</body>
+
+</html>
