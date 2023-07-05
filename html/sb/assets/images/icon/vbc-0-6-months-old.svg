@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="85.039px" height="79.37px" viewBox="-5.219 -16.046 85.039 79.37" enable-background="new -5.219 -16.046 85.039 79.37"
+	 xml:space="preserve">
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_1_0-6thang" x="0" y="0" width="74.601" height="47.277"/>
+		</defs>
+		<clipPath id="SVGID_2_0-6thang">
+			<use xlink:href="#SVGID_1_0-6thang"  overflow="visible"/>
+		</clipPath>
+		<path clip-path="url(#SVGID_2_0-6thang)" fill="#545456" d="M23.335,23.344c5.35-5.349,5.353-13.998,0.013-19.338
+			C18.017-1.323,9.343-1.344,3.995,4.003c-5.344,5.343-5.313,14.01,0.015,19.34C9.351,28.683,17.992,28.687,23.335,23.344"/>
+	</g>
+	<g>
+		<defs>
+			<rect id="SVGID_3_0-6thang" x="0" y="0" width="74.601" height="47.277"/>
+		</defs>
+		<clipPath id="SVGID_4_0-6thang">
+			<use xlink:href="#SVGID_3_0-6thang"  overflow="visible"/>
+		</clipPath>
+		<path clip-path="url(#SVGID_4_0-6thang)" fill="#545456" d="M56.157,26.185c2.144-1.994,5.477-1.88,7.466,0.256
+			c1.982,2.127,1.87,5.474-0.272,7.467l-10.136,9.444c-2.148,2.004-5.478,1.862-7.46-0.267c-1.991-2.136-1.887-5.453,0.268-7.459
+			L56.157,26.185z"/>
+	</g>
+	<g>
+		<defs>
+			<rect id="SVGID_5_0-6thang" x="0" y="0" width="74.601" height="47.277"/>
+		</defs>
+		<clipPath id="SVGID_6_0-6thang">
+			<use xlink:href="#SVGID_5_0-6thang"  overflow="visible"/>
+		</clipPath>
+		<path clip-path="url(#SVGID_6_0-6thang)" fill="#545456" d="M55.892,33.782c-2.036-2.106-1.985-5.441,0.109-7.472
+			c2.09-2.022,5.435-1.976,7.472,0.126l9.637,9.954c2.046,2.112,1.969,5.439-0.122,7.464c-2.095,2.032-5.414,1.99-7.459-0.122
+			L55.892,33.782z"/>
+	</g>
+	<g>
+		<defs>
+			<rect id="SVGID_7_0-6thang" x="0" y="0" width="74.601" height="47.277"/>
+		</defs>
+		<clipPath id="SVGID_8_0-6thang">
+			<use xlink:href="#SVGID_7_0-6thang"  overflow="visible"/>
+		</clipPath>
+		<path clip-path="url(#SVGID_8_0-6thang)" fill="#545456" d="M22.044,18.875c6.938-5.957,17.547,0.906,22.321,4.681l6.885,4.056
+			c4.774,3.774,5.585,10.704,1.812,15.48c-3.775,4.773-10.705,5.585-15.479,1.81L24.07,34.221
+			C19.296,30.446,15.108,24.832,22.044,18.875"/>
+	</g>
+	<g>
+		<defs>
+			<rect id="SVGID_9_0-6thang" x="0" y="0" width="74.601" height="47.277"/>
+		</defs>
+		<clipPath id="SVGID_10_0-6thang">
+			<use xlink:href="#SVGID_9_0-6thang"  overflow="visible"/>
+		</clipPath>
+		<path clip-path="url(#SVGID_10_0-6thang)" fill="#545456" d="M37.053,11.805c1.781-1.18,4.189-0.688,5.369,1.082
+			c1.188,1.793,0.705,4.207-1.092,5.395l-10.316,9.086c-1.787,1.186-4.192,0.688-5.377-1.093c-1.185-1.771-0.688-4.188,1.083-5.371
+			L37.053,11.805z"/>
+	</g>
+	<g>
+		<defs>
+			<rect id="SVGID_11_0-6thang" x="0" y="0" width="74.601" height="47.277"/>
+		</defs>
+		<clipPath id="SVGID_12_0-6thang">
+			<use xlink:href="#SVGID_11_0-6thang"  overflow="visible"/>
+		</clipPath>
+		<path clip-path="url(#SVGID_12_0-6thang)" fill="#545456" d="M36.715,2.978c0.498-2.077,2.592-3.363,4.662-2.874
+			c2.093,0.5,3.387,2.595,2.883,4.688l-1.215,11.045c-0.494,2.086-2.59,3.363-4.672,2.869c-2.077-0.488-3.364-2.591-2.873-4.667
+			L36.715,2.978z"/>
+	</g>
+</g>
+</svg>

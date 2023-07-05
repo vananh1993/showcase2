@@ -1,0 +1,251 @@
+{% extends "_templates/layout.twig" %}
+{% block page %}
+
+    {% set check_all_nutrition_24m = true %}
+    {% if nutrition.content %}
+        {% for item in nutrition.content %}
+            {% if not item.check_popup_confirm %}
+                {% set check_all_nutrition_24m = false %}
+            {% endif %}
+        {% endfor %}
+        {% if check_all_nutrition_24m %}
+            {% include '_templates/popup/xacnhan/thanhphan-single-tab.twig' %}
+            <script type="text/javascript">
+                document.body.classList.add("popup-active");
+                document.body.style.overflow = "hidden";
+            </script>
+        {% endif %}
+    {% endif %}
+
+    {% set page = 'home' %}
+    <div class="page-bbc-stage {% if check_all_nutrition_24m %}hidden-body{% endif %}">
+
+        {# BANNER #}
+        {% if banners %}
+            {% include '_templates/banner/top-banner-video.twig' %}
+        {% endif %}
+
+        {# {% include '_templates/common/floating-buttons.twig' %} #}
+
+        <div class="container introduceProduct padt50">
+            {# INTRO #}
+            <div class="introduceProduct__content clearfix">
+                <div class="introduceProduct__detail ">
+                    <h4 class="headline">
+                        <img src="{{ intro.headline }}" alt="">
+                    </h4>
+                    <div class="content">
+                        {{ intro.content }}
+                    </div>
+                    {% if intro.logo %}
+                        <div class="introduceProduct__logo">
+                            <ul>
+                                {% for item in intro.logo %}
+                                    {# <li class="introduceProduct__logo__item">
+                                        <a href="#chungnhan1" class="js-popup-open" data-module="popup">
+                                            <img src="{{ assets_url }}/images/icon/logo-chung-nhan-3.png" alt="">
+                                        </a>
+                                    </li> #}
+                                    <li class="introduceProduct__logo__item">
+                                        <a href="javascript:;">
+                                            <img src="{{ item.image }}" alt="">
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="introduceProduct__img">
+                    <img src="{{ intro.image }}" alt="">
+                </div>
+            </div>
+
+            {# ADVANCE #}
+            {% if advance %}
+                <div class="introduceProduct__benefit" data-module="changeColor">
+                    <div class="introduceProduct__benefit__content">
+                        {% for item in advance %}
+                            <div class="circle-content">
+                                <a href="{{ (pll_current_language == 'vi') ? item.link : 'javascript:;' }}">
+                                    <div class="thumbnail">
+                                        <img src="{{ item.thumbnail }}" alt="">
+                                        <div class="circle-mask"></div>
+                                    </div>
+                                    <div class="headline" text-color="{{ theme_color }}">
+                                        {{ item.title }}
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+
+        {# BENEFIT #}
+        {% if benefit.content %}
+            <div class="QAwPro container text-center padt89" data-module="changeColor">
+                <h2 class="line-title">
+                    <span text-color="{{ theme_color }}" border-color="{{ theme_color }}">{{ benefit.title }}</span>
+                </h2>
+                <div class="QAwPro__content">
+                    <div class="QAwPro__col QAwPro__col--img visible-xs">
+                        <div class="QAwPro__row">
+                            <img src="{{ benefit.main_image }}" alt="">
+                        </div>
+                    </div>
+                    <div class="QAwPro__col">
+                        {% for item in benefit.content %}
+                            {% if item.even and item.icon != '' %}
+                                <div class="QAwPro__row">
+                                    <span class="icon" bg-color="{{ theme_color }}">
+                                        <img src="{{ item.icon }}" alt="">
+                                    </span>
+                                    <h4 class="headline" text-color="{{ theme_color }}">
+                                        {{ item.title }}
+                                    </h4>
+                                    <div class="content">
+                                        {{ item.desc }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="QAwPro__col QAwPro__col--img hidden-xs">
+                        <div class="QAwPro__row">
+                            <img src="{{ benefit.main_image }}" alt="">
+                        </div>
+                    </div>
+                    <div class="QAwPro__col">
+                        {% for item in benefit.content %}
+                            {% if not item.even and item.icon != '' %}
+                                <div class="QAwPro__row">
+                                    <span class="icon" bg-color="{{ theme_color }}">
+                                        <img src="{{ item.icon }}" alt="">
+                                    </span>
+                                    <h4 class="headline" text-color="{{ theme_color }}">
+                                        {{ item.title }}
+                                    </h4>
+                                    <div class="content">
+                                        {{ item.desc }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {# NUTRITION #}
+        <div class="ingredientProduct container text-center padt89" data-module="changeColor">
+            <h2 class="line-title">
+                <span text-color="{{ theme_color }}" border-color="{{ theme_color }}">{{ __( 'THÀNH PHẦN DINH DƯỠNG', 'vinamilk_suabot' ) }}</span>
+            </h2>
+            <div class="ingredientProduct__content">
+                <div class="ingredientProduct__bg">
+                    <img src="{{ nutrition.background }}" alt="" class="book-bg">
+                    <div class="board"></div>
+                </div>
+                <div class="ingredientProduct__detail">
+                    {% if nutrition.content|length > 1 %}
+                        <div class="ingredientProduct__detail__tabs" data-module="changeColor changeTab">
+                            <ul>
+								{% set active_state = 0 %}
+                                {% for item in nutrition.content %}
+                                    <li
+                                      bg-active="{{ theme_color }}"
+                                      {% if ( not active_state and not item.check_popup_confirm and not check_all_nutrition_24m ) or ( loop.first and check_all_nutrition_24m ) %}
+                                      class="active"
+                                      bg-color="{{ theme_color }}"
+                                      {% set active_state = 1 %}
+                                      {% endif %}
+                                      id-tab="#thanhphan{{ loop.index }}"
+                                      {% if item.check_popup_confirm %}confirm = true{% endif %} >
+                                        {% if item.check_popup_confirm %}
+                                            <a href="#xacnhanThanhphan" class="js-popup-open confirm-tab" id-term="#termThanhphan" data-module="popup" renew>
+                                                {{ item.title }}
+                                            </a>
+                                        {% else %}
+                                            {{ item.title }}
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                                {# <li class="active" bg-color="{{ theme_color }}" bg-active="{{ theme_color }}" id-tab="#thanhphan1">
+                                    cho trẻ từ<br>
+                                    <span class="text-bold">0-6 tháng tuổi</span>
+                                </li>
+                                <li bg-active="{{ theme_color }}" id-tab="#thanhphan2" confirm = true>
+                                    <a href="#xacnhanThanhphan" class="js-popup-open confirm-tab" id-term="#termThanhphan" data-module="popup" renew>
+                                        cho trẻ từ<br>
+                                        <span class="text-bold">6-12 tháng tuổi</span>
+                                    </a>
+                                </li>
+                                <li bg-active="{{ theme_color }}" id-tab="#thanhphan3" confirm = true>
+                                    <a href="#xacnhanThanhphan" class="js-popup-open confirm-tab" id-term="#termThanhphan" data-module="popup" renew>
+                                        cho trẻ từ<br>
+                                        <span class="text-bold">1-2 tuổi</span>
+                                    </a>
+                                </li>
+                                <li bg-active="{{ theme_color }}" id-tab="#thanhphan4" confirm = true>
+                                    <a href="#xacnhanThanhphan" class="js-popup-open confirm-tab" id-term="#termThanhphan" data-module="popup" renew>
+                                        cho trẻ từ<br>
+                                        <span class="text-bold">2-6 tuổi</span>
+                                    </a>
+                                </li> #}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% include '_templates/bang-thanh-phan/thanhphan-mutiltab.twig' %}
+                </div>
+            </div>
+        </div>
+
+        {# PACKAGING #}
+        <div class="typePack container padt89">
+            <div class="typePack__content clearfix">
+                <div class="typePack__detail left">
+                    <h2 class="line-title">
+                        <span text-color="{{ theme_color }}" border-color="{{ theme_color }}">{{ __( 'CHỦNG LOẠI VÀ QUY CÁCH ĐÓNG GÓI', 'vinamilk_suabot' ) }}</span>
+                    </h2>
+                    <div class="content">
+                        {{ packaging.content }}
+                        {#
+                        <h4 class="headline" text-color="{{ theme_color }}">
+                            Optimum mama gồm các chủng loại bao bì sau:
+                        </h4>
+                        <div class="info textDotGold">
+                            <div class="info__item">
+                                <p>Sữa Bột</p>
+                                <ul>
+                                    <li> Hộp thiếc 400 g </li>
+                                    <li> Hộp thiếc 900 g </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="btn-block">
+                            <a href="#" class="button button--border"><span>Mua ngay</span></a>
+                        </div>
+                        #}
+                    </div>
+                </div>
+                <div class="typePack__img right">
+                    <img src="{{ packaging.image }}" alt="">
+                    {% if packaging.link_ecommerce %}
+                        <div class="btn-block">
+                            <a href="{{ packaging.link_ecommerce }}" target="_blank" class="button button--border" onclick="tracking('{{ packaging.title_ga }}+button', 'click+Mua_ngay', '{{ packaging.title_ga }}+buttonclick+Mua_ngay');"><span>{{ __( 'Mua ngay', 'vinamilk_suabot' ) }}</span></a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% include '_templates/partials/products-section.twig' %}
+
+    </div>
+
+    {% include '_templates/popup/xacnhan/thanhphan.twig' %}
+    {% include '_templates/popup/chungnhan/chungnhan-1.twig' %}
+    {% include '_templates/popup/chungnhan/chungnhan-2.twig' %}
+{% endblock %}

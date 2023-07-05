@@ -12,25 +12,21 @@ const router = createRouter({
     {
       path: '/list',
       name: 'list',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('@/views/ShowcaseView.vue')
     },
     {
       path: '/detail/:slug',
       name: 'detail',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('@/views/Detail.vue')
+    },
+    {
+      path: '/html/:urlroute/:url',
+      name: 'detail',
+      component: () => import('@/views/LoadHtml.vue')
     },
     {
       path: '/not-found',
       name: '404',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('@/views/404.vue')
     },
     // {
@@ -45,7 +41,3 @@ const router = createRouter({
 })
 
 export default router
-
-// load dynamic external HTML
-// load dynamic external CSS
-// load dynamic external JS
