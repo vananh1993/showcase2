@@ -16,7 +16,7 @@
     const route = useRoute();
     const fileUrlRoute = ref(route.params.urlroute)
     const fileUrl = ref(route.params.url)
-    console.log(fileUrlRoute, fileUrl);
+    // console.log(fileUrlRoute, fileUrl);
     //
     // const htmlFileContent = require('../html/sting/index.html');
 
