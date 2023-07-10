@@ -12,6 +12,11 @@ export const useShowcaseStore = defineStore("showcase", {
         getShowcaseFromCate(state){
           return (categoryName) => state.posts.filter((item) => item.category === categoryName)
         }
+        getShowcaseFromTags(state){
+            state.showcases.filter( (ele) => {
+                return ele.tags;
+            })
+        }
     },
     actions: {
         async fetchShowcases() {

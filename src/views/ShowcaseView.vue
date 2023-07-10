@@ -1,32 +1,44 @@
 <template>
-  <div class="container mx-auto px-4 pt-10 pb-20">
-    <input
-        type="text"
-        v-model="search"
-        class="border border-gray-600 p-4"
-        @keyup.enter="searchShowcases"
-    />
-    <h1 class=" py-7 text-center text-3xl font-semibold uppercase text-gray-800">{{ title }}</h1>
-    <div class="grid grid-cols-4 gap-6 list-showcase">
-        <div v-for="showcase in showcases" :key="showcase.id" class=" list-showcase__item max-w-xs rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer overflow-hidden">
-            <RouterLink :to="showcase.url"  target="_blank">
-                <div>
-                    <img :src="'../src/assets/thumb-showcase/' + showcase.imgUrl" alt="">
+  <div class="mx-auto pb-20">
+    <div class="banner-top mx-auto">
+        <div class="banner-top__bg">
+            <img src="../assets/img/bg-banner.png" alt="">
+        </div>
+        <div class="banner-top__content basis-1/3">
+            <h1 class="pb-6 text-center text-3xl font-semibold uppercase text-white-800">{{ title }}</h1>
+            <input
+                type="text"
+                v-model="search"
+                class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..."
+                @keyup.enter="searchShowcases"
+            />
+        </div>
+    </div>
+    <div class="flex mt-8 mx-20">
+        <div class="basis-3/4">
+            <div class="list-showcase grid grid-cols-4 gap-8  ">
+                <div v-for="showcase in showcases" :key="showcase.id" class=" list-showcase__item  rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer overflow-hidden">
+                    <RouterLink :to="showcase.url"  target="_blank">
+                        <div>
+                            <img :src="'../src/assets/thumb-showcase/' + showcase.imgUrl" alt="">
+                        </div>
+                        <div class="py-3 px-4 bg-white">
+                            <h3 class="text-lg font-semibold text-gray-600">{{ showcase.title }}-{{showcase.id}}</h3>
+                        </div>
+                    </RouterLink>
+                    <ul class="pb-6 px-4">
+                        <li class="inline-block bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 hover:bg-green-900" v-for="tag in showcase.tags">
+                            <a href="#/">{{ tag }}</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="py-3 px-4 bg-white">
-                    <h3 class="text-lg font-semibold text-gray-600">{{ showcase.title }}-{{showcase.id}}</h3>
-                </div>
-            </RouterLink>
-            <ul class="pb-6 px-4">
-                <li class="inline-block bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 hover:bg-green-900" v-for="tag in showcase.tags">
-                    <a href="#/">{{ tag }}</a>
-                </li>
-            </ul>
+            </div>
+        </div>
+        <div class="basis-1/4">
+            <h3>Tags</h3>
         </div>
 
-        <!-- .... -->
     </div>
-
     <Observer v-if="enabled" @intersect="getItems" />
 
   </div>
@@ -38,7 +50,7 @@
     import Observer from '@/components/IntersectionObserver.vue';
     import { useShowcaseStore } from "../stores/showcases";
     const store = useShowcaseStore();
-    
+
     const limit = 12;
 
     const title = ref("List Showcase");
@@ -47,6 +59,8 @@
     const search = ref();
     const showcases = ref([]);
 
+    const tags = getShowcaseFromTags();
+    console.log(tags);
     onMounted(async () => {
       await store.fetchShowcases();
 
@@ -72,12 +86,41 @@
     }
 </script>
 <style lang="scss" scoped media="screen">
+    .banner-top {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        background: #111827;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &__content{
+            position: relative;
+            z-index: 2;
+        }
+        &__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
     .list-showcase {
         &__item {
             img {
-                height: 200px;
-                width: auto;
+                width: 100%;
+                height: 80%;
+                // width: auto;
                 object-fit: cover;
+                object-position: center;
             }
         }
         ul {
