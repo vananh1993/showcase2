@@ -17,7 +17,9 @@
     <div class="flex mt-8 mx-20">
         <div class="basis-3/4">
             <div class="list-showcase grid grid-cols-4 gap-8  ">
-                <div v-for="showcase in showcases" :key="showcase.id" class=" list-showcase__item  rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer overflow-hidden">
+                <Item v-for="showcase in showcases" id="showcase.id" title="showcase.title" />
+                <!--  -->
+                <!-- <div v-for="showcase in showcases" :key="showcase.id" class=" list-showcase__item  rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer overflow-hidden">
                     <RouterLink :to="showcase.url"  target="_blank">
                         <div>
                             <img :src="'../src/assets/thumb-showcase/' + showcase.imgUrl" alt="">
@@ -31,11 +33,15 @@
                             <a href="#/">{{ tag }}</a>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
-        <div class="basis-1/4">
-            <h3>Tags</h3>
+        <div class="basis-1/4 pl-6">
+            <h2>Tags</h2>
+            <div class="" v-for="tag in getShowcasesTag">
+                {{ tag }}
+            </div>
+
         </div>
 
     </div>
@@ -48,6 +54,7 @@
     import { RouterLink } from "vue-router"
     import { ref, onMounted, computed } from "vue";
     import Observer from '@/components/IntersectionObserver.vue';
+    import Item from '@/components/Item.vue';
     import { useShowcaseStore } from "../stores/showcases";
     const store = useShowcaseStore();
 
@@ -59,8 +66,8 @@
     const search = ref();
     const showcases = ref([]);
 
-    const tags = getShowcaseFromTags();
-    console.log(tags);
+    // const tags = store.getShowcaseFromTags;
+    // console.log(tags);
     onMounted(async () => {
       await store.fetchShowcases();
 
@@ -84,6 +91,11 @@
             ...(await store.getItemsByPage(page.value, search.value, limit))
         ];
     }
+    // const _tag = [];
+    const getShowcasesTag = computed(() => {
+        return [...new Set(store.getShowcases.map((item) => item.tags).flat())];
+
+    });
 </script>
 <style lang="scss" scoped media="screen">
     .banner-top {

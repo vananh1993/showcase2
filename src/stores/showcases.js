@@ -7,14 +7,20 @@ export const useShowcaseStore = defineStore("showcase", {
     }),
     getters: {
         getShowcases(state){
+            // console.log(state.showcases);
             return state.showcases
         },
-        getShowcaseFromCate(state){
-          return (categoryName) => state.posts.filter((item) => item.category === categoryName)
-        }
+        // getShowcaseFromCate(state){
+        //     return (categoryName) => state.posts.filter((item) => item.category === categoryName)
+        // },
         getShowcaseFromTags(state){
-            state.showcases.filter( (ele) => {
-                return ele.tags;
+            const _tags = [];
+            console.log(state.showcases);
+            state.showcases.filter(ele => {
+                 const isDuplicate = _tags.includes(ele.tags);
+                 console.log(isDuplicate);
+                 return isDuplicate;
+                // return ele.tags;
             })
         }
     },
