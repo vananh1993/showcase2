@@ -17,23 +17,8 @@
     <div class="flex mt-8 mx-20">
         <div class="basis-3/4">
             <div class="list-showcase grid grid-cols-4 gap-8  ">
-                <Item v-for="showcase in showcases" id="showcase.id" title="showcase.title" />
-                <!--  -->
-                <!-- <div v-for="showcase in showcases" :key="showcase.id" class=" list-showcase__item  rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer overflow-hidden">
-                    <RouterLink :to="showcase.url"  target="_blank">
-                        <div>
-                            <img :src="'../src/assets/thumb-showcase/' + showcase.imgUrl" alt="">
-                        </div>
-                        <div class="py-3 px-4 bg-white">
-                            <h3 class="text-lg font-semibold text-gray-600">{{ showcase.title }}-{{showcase.id}}</h3>
-                        </div>
-                    </RouterLink>
-                    <ul class="pb-6 px-4">
-                        <li class="inline-block bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 hover:bg-green-900" v-for="tag in showcase.tags">
-                            <a href="#/">{{ tag }}</a>
-                        </li>
-                    </ul>
-                </div> -->
+                <ShowcaseItem  v-for="showcase in showcases" :id="showcase.id" :title="showcase.title" :imgUrl="showcase.imgUrl" :tags="showcase.tags"  />
+            
             </div>
         </div>
         <div class="basis-1/4 pl-6">
@@ -54,7 +39,7 @@
     import { RouterLink } from "vue-router"
     import { ref, onMounted, computed } from "vue";
     import Observer from '@/components/IntersectionObserver.vue';
-    import Item from '@/components/Item.vue';
+    import ShowcaseItem from '@/components/ShowcaseItem.vue';
     import { useShowcaseStore } from "../stores/showcases";
     const store = useShowcaseStore();
 
