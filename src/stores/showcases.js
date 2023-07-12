@@ -53,6 +53,7 @@ export const useShowcaseStore = defineStore("showcase", {
                         }))
                         .filter((item) => {
                             return item.title.toLowerCase().includes(search)
+                                || item.tags.includes(search)
                                 || item.keywords.some((keyword) => searchParts.includes(keyword));
                         })
                         .slice(Math.max(0, page - 1) * limit, page * limit));

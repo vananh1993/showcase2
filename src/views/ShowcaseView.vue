@@ -18,14 +18,14 @@
         <div class="basis-3/4">
             <div class="list-showcase grid grid-cols-4 gap-8  ">
                 <ShowcaseItem  v-for="showcase in showcases" :id="showcase.id" :title="showcase.title" :imgUrl="showcase.imgUrl" :tags="showcase.tags"  />
-            
+
             </div>
         </div>
         <div class="basis-1/4 pl-6">
             <h2>Tags</h2>
-            <div class="" v-for="tag in getShowcasesTag">
-                {{ tag }}
-            </div>
+            <ul class="">
+                <li  v-for="tag in getShowcasesTag" @click.prevent="searchShowcases(tag)">{{ tag }}</li>
+            </ul>
 
         </div>
 
@@ -59,21 +59,28 @@
       enabled.value = true;
     });
 
-    const searchShowcases = async () => {
+    const searchShowcases = async (key = null) => {
         enabled.value = false;
         showcases.value = [];
         page.value = 0;
-
-        await getItems();
+        console.log(key);
+        if (!key) {
+            key = "";
+        }
+        await getItems(key);
 
         enabled.value = true;
     };
 
-    const getItems = async () => {
+    const getItems = async (searchs = null) => {
         page.value++;
+        console.log(searchs);
+        if (!searchs) {
+            searchs = search.value;
+        }
         showcases.value = [
             ...showcases.value,
-            ...(await store.getItemsByPage(page.value, search.value, limit))
+            ...(await store.getItemsByPage(page.value, searchs, limit))
         ];
     }
     // const _tag = [];
