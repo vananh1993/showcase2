@@ -59,25 +59,25 @@
       enabled.value = true;
     });
 
-    const searchShowcases = async (key = null) => {
+    const searchShowcases = async (key) => {
+        if (!key) {
+            key = search.value;
+        }
         enabled.value = false;
         showcases.value = [];
         page.value = 0;
-        console.log(key);
-        if (!key) {
-            key = "";
-        }
+        console.log(search.value);
         await getItems(key);
 
         enabled.value = true;
     };
 
-    const getItems = async (searchs = null) => {
+    const getItems = async (searchs) => {
+        // if (!searchs) {
+        //     searchs = search.value;
+        // }
         page.value++;
         console.log(searchs);
-        if (!searchs) {
-            searchs = search.value;
-        }
         showcases.value = [
             ...showcases.value,
             ...(await store.getItemsByPage(page.value, searchs, limit))
