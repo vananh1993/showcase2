@@ -13,10 +13,13 @@
                 <a href="#/">{{ tag }}</a>
             </li>
         </ul>
+        
     </div>
 </template>
 
 <script setup>
+// import Modal from '@components/Modal/Modal.vue'
+// import Modal from '@/components//Modal/Modal.vue';
 const props = defineProps({
     id: Number,
     title: String,
