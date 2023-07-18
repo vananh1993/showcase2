@@ -1,11 +1,13 @@
 <template>
     <div class=" list-showcase__item  rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer overflow-hidden">
         <!-- <RouterLink  target="_blank"> -->
-            <div>
-                <img :src="'../src/assets/thumb-showcase/' + imgUrl" alt="">
-            </div>
-            <div class="py-3 px-4 bg-white">
-                <h3 class="text-lg font-semibold text-gray-600">{{ title }}-{{id}}</h3>
+            <div @click.prevent="emits('selected', { title })">
+                <div>
+                    <img :src="'../src/assets/thumb-showcase/' + imgUrl" alt="">
+                </div>
+                <div class="py-3 px-4 bg-white">
+                    <h3 class="text-lg font-semibold text-gray-600">{{ title }}-{{id}}</h3>
+                </div>
             </div>
         <!-- </RouterLink> -->
         <ul class="pb-6 px-4">
@@ -25,7 +27,9 @@ const props = defineProps({
     title: String,
     imgUrl: String,
     tags: Array,
-})
+});
+
+const emits = defineEmits('selected');
 </script>
 
 <style lang="css" scoped>

@@ -15,10 +15,10 @@ export const useShowcaseStore = defineStore("showcase", {
         // },
         getShowcaseFromTags(state){
             const _tags = [];
-            console.log(state.showcases);
+            // console.log(state.showcases);
             state.showcases.filter(ele => {
                  const isDuplicate = _tags.includes(ele.tags);
-                 console.log(isDuplicate);
+                 // console.log(isDuplicate);
                  return isDuplicate;
                 // return ele.tags;
             })
@@ -36,15 +36,13 @@ export const useShowcaseStore = defineStore("showcase", {
             }
         },
 
-        getItemsByPage(page, search = null, limit = 12) {
+        getItemsByPage(page, search = null, tag = null, limit = 12) {
             return new Promise((resolve) => setTimeout(
                 () => {
-                    if (!search) {
-                        return resolve(this.showcases.slice(Math.max(0, page - 1) * limit, page * limit));
-                    }
-
-                    search = search.toLowerCase().trim();
+                    search = (search || '').toLowerCase().trim();
                     const searchParts = search.split(' ');
+
+                    console.info(this.showcases, 99);
 
                     resolve(this.showcases
                         .map((item) => ({
@@ -52,9 +50,17 @@ export const useShowcaseStore = defineStore("showcase", {
                             keywords: item.title.toLowerCase().split(' ')
                         }))
                         .filter((item) => {
-                            return item.title.toLowerCase().includes(search)
-                                || item.tags.includes(search)
-                                || item.keywords.some((keyword) => searchParts.includes(keyword));
+
+                    console.info(12);
+                            let result = true;
+
+                            if (search) {
+                                result = item.title.toLowerCase().includes(search)
+                                    || item.tags.includes(search)
+                                    || item.keywords.some((keyword) => searchParts.includes(keyword));
+                            }
+
+                            return result && (!tag ? true : item.tags.includes(tag));
                         })
                         .slice(Math.max(0, page - 1) * limit, page * limit));
                 }, 500

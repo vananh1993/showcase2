@@ -8,7 +8,7 @@
             <h1 class="pb-6 text-center text-3xl font-semibold uppercase text-white-800">{{ title }}</h1>
             <input
                 type="text"
-                v-model="search"
+                v-model="search.keyword"
                 class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..."
                 @keyup.enter="searchShowcases"
             />
@@ -17,23 +17,26 @@
     <div class="flex mt-8 mx-20">
         <div class="basis-3/4">
             <div class="list-showcase grid grid-cols-4 gap-8  ">
-                <ShowcaseItem  v-for="showcase in showcases" :id="showcase.id" :title="showcase.title" :imgUrl="showcase.imgUrl" :tags="showcase.tags"  />
+                <ShowcaseItem
+                    @selected="selectShowcase"
+                    v-for="showcase in showcases" :id="showcase.id" :title="showcase.title" :imgUrl="showcase.imgUrl" :tags="showcase.tags"  />
 
             </div>
         </div>
         <div class="basis-1/4 pl-6">
             <h2>Tags</h2>
             <ul class="">
-                <li  v-for="tag in getShowcasesTag" @click.prevent="searchShowcases(tag)">{{ tag }}</li>
+                <li  v-for="tag in getShowcasesTag" @click.prevent="selectTag(tag)">{{ tag }}</li>
+                <li @click="selectTag(null)">Clear</li>
             </ul>
-            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+            <button data-modal-target="modal-showcase-detail" data-modal-toggle="modal-showcase-detail" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
               Toggle modal
             </button>
         </div>
         
     </div>
-    <Observer v-if="enabled" @intersect="getItems" />
-
+    <Observer @intersect="pageExceededBottom()" />
+    <ShowcaseModal :showcase="showcaseDetail" />
   </div>
 </template>
 
@@ -41,52 +44,78 @@
     import { RouterLink } from "vue-router"
     import { ref, onMounted, computed } from "vue";
     import Observer from '@/components/IntersectionObserver.vue';
+    import ShowcaseModal from '@/components/Modal.vue'
     import ShowcaseItem from '@/components/ShowcaseItem.vue';
     import { useShowcaseStore } from "../stores/showcases";
     const store = useShowcaseStore();
-    import { initFlowbite } from 'flowbite'
+    import { initFlowbite, Modal } from 'flowbite'
 
     const limit = 12;
 
+    const showcases = ref([]);
+    const showcaseDetail = ref(null);
+
     const title = ref("List Showcase");
     const page = ref(0);
-    const enabled = ref(false);
-    const search = ref();
-    const showcases = ref([]);
+    const search = ref({
+        keyword: null,
+        tag: null
+    });
+    let modal;
+    let enableObserver = true;
 
-    // const tags = store.getShowcaseFromTags;
-    // console.log(tags);
     onMounted(async () => {
+        modal = new Modal(document.getElementById('modal-showcase-detail'));
         initFlowbite();
-        await store.fetchShowcases();
-
-        enabled.value = true;
+        store.fetchShowcases();
     });
 
-    const searchShowcases = async () => {
-        // if (!key) {
-        //     key = search.value;
-        // }
-        enabled.value = false;
-        showcases.value = [];
-        page.value = 0;
-        // console.log(search.value);
-        await getItems();
-
-        enabled.value = true;
+    const selectShowcase = (showcase) => {
+        modal.show();
+        showcaseDetail.value = showcase;
     };
 
-    const getItems = async () => {
-        // if (!searchs) {
-        //     searchs = search.value;
-        // }
+    const selectTag = async (tag) => {
+        search.value.tag = tag;
+        enableObserver = false;
+
+        await getItems(true);
+
+        enableObserver = true;
+    };
+
+    const searchShowcases = async () => {
+        enableObserver = false;
+
+        await getItems(true);
+
+        enableObserver = true;
+    };
+
+    const pageExceededBottom = () => {
+        if (!enableObserver) {
+            return;
+        }
+
         page.value++;
-        // console.log(searchs);
+
+        getItems();
+    };
+
+    const getItems = async (reset = false) => {
+        if (reset) {
+            page.value = 1;
+            showcases.value = [];
+        }
+
+        console.log(page.value, search.value.keyword, search.value.tag, limit);
+
         showcases.value = [
             ...showcases.value,
-            ...(await store.getItemsByPage(page.value, search.value, limit))
+            ...(await store.getItemsByPage(page.value, search.value.keyword, search.value.tag, limit))
         ];
-    }
+    };
+
     // const _tag = [];
     const getShowcasesTag = computed(() => {
         return [...new Set(store.getShowcases.map((item) => item.tags).flat())];
