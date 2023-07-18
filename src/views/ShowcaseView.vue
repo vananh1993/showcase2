@@ -15,25 +15,25 @@
         </div>
     </div>
     <div class="flex mt-8 mx-20">
-        <div class="basis-3/4">
-            <div class="list-showcase grid grid-cols-4 gap-8  ">
-                <ShowcaseItem
-                    @selected="selectShowcase"
-                    v-for="showcase in showcases" :id="showcase.id" :title="showcase.title" :imgUrl="showcase.imgUrl" :tags="showcase.tags"  />
 
-            </div>
-        </div>
         <div class="basis-1/4 pl-6">
             <h2>Tags</h2>
             <ul class="">
+                <li @click="selectTag(null)">All Showcases</li>
                 <li  v-for="tag in getShowcasesTag" @click.prevent="selectTag(tag)">{{ tag }}</li>
-                <li @click="selectTag(null)">Clear</li>
             </ul>
             <button data-modal-target="modal-showcase-detail" data-modal-toggle="modal-showcase-detail" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
               Toggle modal
             </button>
         </div>
-        
+        <div class="basis-3/4">
+            <div class="list-showcase grid grid-cols-4 gap-8  ">
+                <ShowcaseItem
+                    @selected="selectShowcase"
+                    v-for="showcase in showcases" :showcase="showcase" :id="showcase.id" :title="showcase.title" :imgUrl="showcase.imgUrl" :tags="showcase.tags"  />
+
+            </div>
+        </div>
     </div>
     <Observer @intersect="pageExceededBottom()" />
     <ShowcaseModal :showcase="showcaseDetail" />
@@ -71,6 +71,7 @@
     });
 
     const selectShowcase = (showcase) => {
+        console.log(showcase);
         modal.show();
         showcaseDetail.value = showcase;
     };
@@ -108,7 +109,6 @@
             showcases.value = [];
         }
 
-        console.log(page.value, search.value.keyword, search.value.tag, limit);
 
         showcases.value = [
             ...showcases.value,

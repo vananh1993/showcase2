@@ -42,7 +42,7 @@ export const useShowcaseStore = defineStore("showcase", {
                     search = (search || '').toLowerCase().trim();
                     const searchParts = search.split(' ');
 
-                    console.info(this.showcases, 99);
+                    // console.info(this.showcases, 99);
 
                     resolve(this.showcases
                         .map((item) => ({
@@ -51,7 +51,7 @@ export const useShowcaseStore = defineStore("showcase", {
                         }))
                         .filter((item) => {
 
-                    console.info(12);
+                    // console.info(12);
                             let result = true;
 
                             if (search) {
