@@ -3,9 +3,9 @@
 
     <div class="text-center container my-10">
         <h1 class="text-3xl font-semibold text-center text-gray-800 dark:text-gray-200">
-                {{ title }}
+            {{ title }}
         </h1>
-        <p>See below our collection</p>
+        <p>See below our collections</p>
     </div>
     <div class=" mt-8 mx-5 md:mx-10  xl:mx-20">
         <div class="mt-8 flex flex-row items-center justify-between">
@@ -17,14 +17,9 @@
                     @keyup.enter="searchShowcases"
                 />
             </div>
-            <div class="flex items-center basis-3/4 md:ml-10  overflow-y-auto whitespace-nowrap scrollbar">
-                <a href="#/" class="px-3 py-1.5  whitespace-nowrap text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg capitalize"  @click="selectTag(null)">All Showcases</a>
-                <a class="px-3 py-1.5  whitespace-nowrap text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg capitalize"  v-for="tag in getShowcasesTag" @click.prevent="selectTag(tag)">{{ tag }}</a>
-                <a class="px-3 py-1.5  whitespace-nowrap text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg capitalize"  v-for="tag in getShowcasesTag" @click.prevent="selectTag(tag)">{{ tag }}</a>
-                <a class="px-3 py-1.5  whitespace-nowrap text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg capitalize"  v-for="tag in getShowcasesTag" @click.prevent="selectTag(tag)">{{ tag }}</a>
-                <!-- <button hide data-modal-target="modal-showcase-detail" data-modal-toggle="modal-showcase-detail" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                  Toggle modal
-                </button> -->
+            <div class="flex items-center basis-3/4 md:ml-10 gap-2  overflow-y-auto whitespace-nowrap scrollbar">
+                <a href="#/" class="px-3 py-1.5  whitespace-nowrap text-gray-500  rounded-lg bg-gray-100 rounded-lg capitalize"  @click="selectTag(null)">All Showcases</a>
+                <a class="px-3 py-1.5  whitespace-nowrap text-gray-500 rounded-lg bg-gray-100 rounded-lg capitalize"  v-for="tag in getShowcasesTag" @click.prevent="selectTag(tag)">{{ tag }}</a>
             </div>
         </div>
 
@@ -73,7 +68,7 @@
     });
 
     const selectShowcase = (showcase) => {
-        console.log(showcase);
+        // console.log(showcase);
         modal.show();
         showcaseDetail.value = showcase;
     };
