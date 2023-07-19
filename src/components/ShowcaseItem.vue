@@ -38,5 +38,23 @@ const props = defineProps({
 const emits = defineEmits('selected');
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+    .list-showcase {
+        &__item {
+            img {
+                width: 100%;
+                height: 80%;
+                // width: auto;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+        ul {
+            a {
+                &:hover {
+                    background: transparent !important;
+                }
+            }
+        }
+    }
 </style>
