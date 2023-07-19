@@ -1,31 +1,30 @@
 <template>
   <div class="mx-auto pb-20">
-    <div class="banner-top mx-auto">
-        <div class="banner-top__bg">
-            <img src="../assets/img/bg-banner.png" alt="">
-        </div>
-        <div class="banner-top__content md:basis-1/3">
-            <h1 class="pb-6 text-center text-3xl font-semibold uppercase text-white-800">{{ title }}</h1>
-            <input
-                type="text"
-                v-model="search.keyword"
-                class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..."
-                @keyup.enter="searchShowcases"
-            />
-        </div>
+
+    <div class="text-center container my-10">
+        <h1 class="text-3xl font-semibold text-center text-gray-800 dark:text-gray-200">
+                {{ title }}
+        </h1>
+        <p>See below our collection</p>
     </div>
     <div class=" mt-8 mx-5 md:mx-10  xl:mx-20">
-        <div class="mt-8 flex items-center justify-between space-x-2">
-            <div class="relative inline-block w-auto">
-                <a href="#/" class="px-3 py-1.5  whitespace-nowrap text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg capitalize"  @click="selectTag(null)">All Showcases</a>
+        <div class="mt-8 flex flex-row items-center justify-between">
+            <div class="relative basis-1/4">
+                <input
+                    type="text"
+                    v-model="search.keyword"
+                    class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..."
+                    @keyup.enter="searchShowcases"
+                />
             </div>
-            <div class="flex items-center space-x-4 overflow-y-auto whitespace-nowrap scrollbar">
+            <div class="flex items-center basis-3/4 md:ml-10  overflow-y-auto whitespace-nowrap scrollbar">
+                <a href="#/" class="px-3 py-1.5  whitespace-nowrap text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg capitalize"  @click="selectTag(null)">All Showcases</a>
                 <a class="px-3 py-1.5  whitespace-nowrap text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg capitalize"  v-for="tag in getShowcasesTag" @click.prevent="selectTag(tag)">{{ tag }}</a>
                 <a class="px-3 py-1.5  whitespace-nowrap text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg capitalize"  v-for="tag in getShowcasesTag" @click.prevent="selectTag(tag)">{{ tag }}</a>
                 <a class="px-3 py-1.5  whitespace-nowrap text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg capitalize"  v-for="tag in getShowcasesTag" @click.prevent="selectTag(tag)">{{ tag }}</a>
-                <button hide data-modal-target="modal-showcase-detail" data-modal-toggle="modal-showcase-detail" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                <!-- <button hide data-modal-target="modal-showcase-detail" data-modal-toggle="modal-showcase-detail" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                   Toggle modal
-                </button>
+                </button> -->
             </div>
         </div>
 
@@ -175,5 +174,5 @@
             }
         }
     }
-    
+
 </style>
