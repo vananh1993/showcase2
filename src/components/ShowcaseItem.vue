@@ -1,7 +1,7 @@
 <template>
     <div class=" list-showcase__item  rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer overflow-hidden">
         <!-- <RouterLink  target="_blank"> -->
-            <div @click.prevent="emits('selected', showcase)">
+            <div class="" @click.prevent="emits('selected', showcase)">
                 <div>
                     <img :src="props.showcase.imgUrl" alt="">
                 </div>

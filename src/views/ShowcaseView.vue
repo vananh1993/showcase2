@@ -10,6 +10,11 @@
     <div class=" mt-8 mx-5 md:mx-10  xl:mx-20">
         <div class="mt-8 flex flex-row items-center justify-between">
             <div class="relative basis-1/4">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
                 <input
                     type="text"
                     v-model="search.keyword"
@@ -27,8 +32,7 @@
             <div class="list-showcase grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 md:gap-8 gap-4  ">
                 <ShowcaseItem
                     @selected="selectShowcase"
-                    v-for="showcase in showcases" :showcase="showcase" :id="showcase.id" :title="showcase.title" :imgUrl="showcase.imgUrl" :tags="showcase.tags"  />
-
+                    v-for="showcase in showcases" :showcase="showcase" :id="showcase.id"  />
             </div>
         </div>
     </div>
