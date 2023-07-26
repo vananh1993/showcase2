@@ -2,7 +2,7 @@
   <div class="mx-auto pb-20">
 
     <div class="text-center container mx-auto my-10">
-        <h1 class="text-3xl font-semibold text-center text-gray-800 dark:text-gray-200">
+        <h1 class="text-3xl section-title font-semibold text-center text-gray-800 dark:text-gray-200">
             {{ title }}
         </h1>
         <p class="text-lg ">See below our collections</p>
@@ -22,8 +22,8 @@
                     @keyup.enter="searchShowcases"
                 />
             </div>
-            <div class="flex items-center basis-3/4 md:ml-10 gap-2  overflow-y-auto whitespace-nowrap scrollbar">
-                <a href="#/" class="px-3 py-1.5  whitespace-nowrap text-gray-500  rounded-lg bg-gray-100 rounded-lg capitalize"  @click="selectTag(null)">All Showcases</a>
+            <div class="list-tag flex items-center basis-3/4 md:ml-10 gap-2  overflow-y-auto whitespace-nowrap scrollbar">
+                <a href="#/" class="px-3 py-1.5  whitespace-nowrap text-gray-500  rounded-lg bg-gray-100 rounded-lg capitalize active"  @click="selectTag(null)">All Showcases</a>
                 <a class="px-3 py-1.5  whitespace-nowrap text-gray-500 rounded-lg bg-gray-100 rounded-lg capitalize"  v-for="tag in getShowcasesTag" @click.prevent="selectTag(tag)">{{ tag }}</a>
             </div>
         </div>
@@ -173,5 +173,15 @@
             }
         }
     }
-
+    .section-title {
+        color: #01c38d;
+    }
+    .list-tag {
+        a {
+            &.active {
+                background-color: #01c38d;
+                color: #fff;
+            }
+        }
+    }
 </style>
