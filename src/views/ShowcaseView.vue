@@ -23,11 +23,8 @@
                 />
             </div>
             <div class="list-tag flex items-center basis-3/4 md:ml-10 gap-2  overflow-y-auto whitespace-nowrap scrollbar">
-                <a href="#/" :class="{ active: isActive}" class="px-3 py-1.5  whitespace-nowrap text-gray-500  rounded-lg bg-gray-100 rounded-lg capitalize] "  @click="selectTag(null)">All Showcases</a>
-                <a href="#/" :class="{ active: isActive}" class="px-3 py-1.5 whitespace-nowrap text-gray-500 rounded-lg bg-gray-100 rounded-lg capitalize"  v-for="tag in getShowcasesTag" @click.prevent="selectTag(tag)">{{ tag }}</a>
-                <button data-modal-target="modal-showcase-detail" data-modal-toggle="modal-showcase-detail" class="block hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                    Toggle modal
-                </button>
+                <a href="#/" :class="{ active: null === activeItem}" class="px-3 py-1.5  whitespace-nowrap text-gray-500  rounded-lg bg-gray-100 rounded-lg capitalize] "  @click="selectTag(null); ; toggleActive(null)">All Showcases</a>
+                <a href="#/" :class="{ active: index === activeItem}" class="px-3 py-1.5 whitespace-nowrap text-gray-500 rounded-lg bg-gray-100 rounded-lg capitalize"  v-for="(tag,index) in getShowcasesTag" @click.prevent="selectTag(tag); toggleActive(index)" >{{ tag }}</a>
             </div>
         </div>
 
@@ -41,6 +38,9 @@
     </div>
     <Observer @intersect="pageExceededBottom()" />
     <ShowcaseModal :showcase="showcaseDetail" />
+    <button data-modal-target="modal-showcase-detail" data-modal-toggle="modal-showcase-detail" class="block hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+        Toggle modal
+    </button>
   </div>
 </template>
 
@@ -81,12 +81,16 @@
         showcaseDetail.value = showcase;
     };
 
-    let isActive = false;
+    let activeItem = null;
 
+    const toggleActive = (i) => {
+        console.log(i);
+        activeItem = i;
+    }
     const selectTag = async (tag) => {
         search.value.tag = tag;
         enableObserver = false;
-        isActive = true
+        
         await getItems(true);
 
         enableObserver = true;
