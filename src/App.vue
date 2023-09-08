@@ -17,10 +17,10 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from './firebase/index'
 import { ref, onMounted } from 'vue';
 
-onMounted (() => {
+onMounted (async() => {
   const querySnapshot = await getDocs(collection(db, "listshowcases"));
-  // querySnapshot.forEach((doc) => {
-  //   console.log(doc.id, " => ", doc.data());
-  // });
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id, " => ", doc.data());
+  });
 })
 </script>
