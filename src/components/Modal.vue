@@ -6,7 +6,7 @@
                 <!-- Modal header -->
                 <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        test {{ props.showcaseDetail }}
+                        test {{ showcase?.title }}
                     </h3>
                     <button
                         type="button"
@@ -22,17 +22,17 @@
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
                     <p class="t-center">
-                        <img class="mx-auto" :src="props.showcaseDetail?.imgUrl" alt="" />
+                        <img class="mx-auto" :src="showcase?.imgUrl" alt="" />
                     </p>
                     <div class="text-justify">
-                        {{ props.showcaseDetail?.description }}
+                        {{ showcase?.description }}
                     </div>
                 </div>
                 <!-- Modal footer -->
                 <div class=" text-center  p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                     <a
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        :href="props.showcaseDetail?.imgUrl"
+                        :href="showcase?.imgUrl"
                         target="_blank"
                     >
                         View Demo
@@ -48,9 +48,16 @@
     const props = defineProps({
         showcase: {
             type: Object,
-            default: null,
+            default: null
         },
+        title: String,
     });
+    // const props = defineProps({
+    //     showcase: {
+    //         type: Object,
+    //         default: null,
+    //     },
+    // });
     const emits = defineEmits('close');
 </script>
 

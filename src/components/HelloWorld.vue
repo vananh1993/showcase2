@@ -1,11 +1,19 @@
 <template>
-  <!-- <div>Hello {{ text }}!</div> -->
+  <div>Hello {{ text?.title }}!</div>
 </template>
-<script>
+<script setup>
   // const props = defineProps({
   //     text: {
   //         type: String,
   //         default: 'world',
   //     },
   // });
+
+const props = defineProps({
+    text: {
+        type: Object,
+        default: null
+    },
+    title: String,
+});
 </script>

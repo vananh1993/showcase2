@@ -40,7 +40,7 @@
         <div class="mt-10 md:pl-3">
             <div class="list-showcase grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 md:gap-8 gap-4  ">
                 <ShowcaseItem
-                    @selected="selectShowcase"
+                    @selected="selectShowcase(showcase)"
                     v-for="showcase in listShowcases" :showcase="showcase" :id="showcase.id"  />
             </div>
         </div>
@@ -63,6 +63,7 @@ import { initFlowbite, Modal } from 'flowbite'
 
 const listShowcases = ref([]);
 let showcaseDetail = ref(null);
+let textTest = ref("");
 let modal;
 onMounted (async () => {
     modal = new Modal(document.getElementById('modal-showcase-detail'));
@@ -82,8 +83,7 @@ onMounted (async () => {
 const selectShowcase = (showcase) => {
     // console.log(showcase);
     modal.show();
-    // console.log(showcase.title);
-    showcaseDetail = showcase;
+    showcaseDetail.value = showcase;
     console.log(showcaseDetail);
 };
 </script>
