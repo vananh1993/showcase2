@@ -6,7 +6,7 @@
                     <img :src="props.showcase.imgUrl" alt="" class="transition duration-500 hover:scale-105">
                 </div>
                 <div class="py-3 px-0">
-                    <h3 class="text-lg font-semibold text-gray-600">{{ props.showcase.title }}-{{props.showcase.id}}</h3>
+                    <h3 class="text-lg font-semibold text-gray-600">{{ props.showcase.title }}</h3>
                 </div>
             </div>
         <!-- </RouterLink> -->

@@ -16,9 +16,9 @@
 import { RouterLink, RouterView } from 'vue-router';
 import Header from './layout/header.vue';
 // import Home from '@/views/Home.vue'
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from './firebase/index'
-import { ref, onMounted } from 'vue';
+// import { collection, getDocs } from 'firebase/firestore';
+// import { db } from './firebase/index'
+// import { ref, onMounted } from 'vue';
 // const listShowcases = ref([]);
 
 // onMounted (async () => {
