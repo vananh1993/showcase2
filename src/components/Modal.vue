@@ -52,12 +52,6 @@
         },
         title: String,
     });
-    // const props = defineProps({
-    //     showcase: {
-    //         type: Object,
-    //         default: null,
-    //     },
-    // });
     const emits = defineEmits('close');
 </script>
 
