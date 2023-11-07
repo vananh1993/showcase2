@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 import { createApp } from 'vue'
 import { VueFire, VueFireAuth } from 'vuefire'
 import App from './App.vue'
@@ -16,4 +16,4 @@ app.use(VueFire, {
 })
 
 app.mount('#app')
-</script>
+</script> -->
