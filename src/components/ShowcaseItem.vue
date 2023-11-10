@@ -15,7 +15,9 @@
                 <a href="#/">{{ tag }}</a>
             </li>
         </ul>
-
+        <div class="">
+            <a href="#/" @click.prevent="emits('showPopupEdit', showcase.id)">Edit Item</a>
+        </div>
     </div>
 </template>
 
@@ -35,7 +37,7 @@ const props = defineProps({
     },
     title: String,
 });
-const emits = defineEmits('selected');
+const emits = defineEmits(['selected', 'showPopupEdit']);
 </script>
 
 <style lang="scss" scoped>

@@ -16,8 +16,11 @@
         </h1>
         <p class="text-lg ">See below our collections</p>
     </div>
+    <AddOrUpdate @close="toggleShow" v-if="showPopup"/>
+    
     <div class=" mt-8 mx-5 md:mx-10  xl:mx-20">
         <div class="mt-8 flex flex-row items-center justify-between">
+            
             <!-- <div class="relative basis-1/4">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -38,9 +41,12 @@
         </div>
 
         <div class="mt-10 md:pl-3">
-            <div class="list-showcase grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 md:gap-8 gap-4  ">
+            <button @click="toggleShow" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Showcase</button>
+            <div class="list-showcase mt-10 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 md:gap-8 gap-4  ">
+                <!-- @showPopupEdit="editShowcase(id)" -->
                 <ShowcaseItem
                     @selected="selectShowcase(showcase)"
+                    
                     v-for="showcase in listShowcases" :showcase="showcase" :id="showcase.id"  />
             </div>
         </div>
@@ -60,19 +66,23 @@ import { ref, onMounted } from 'vue';
 import ShowcaseModal from '@/components/Modal.vue'
 import ShowcaseItem from '@/components/ShowcaseItem.vue';
 import { initFlowbite, Modal } from 'flowbite'
+import AddOrUpdate from '@/components/AddOrUpdate.vue';
 
 const listShowcases = ref([]);
 let showcaseDetail = ref(null);
 let textTest = ref("");
 let modal;
+const showcaseUpdate = ref([]);
+const showPopup = ref(false);
+
 onMounted (async () => {
     modal = new Modal(document.getElementById('modal-showcase-detail'));
     initFlowbite();
-    const querySnapshot = await getDocs(collection(db, "listshowcases"));
-
+    const querySnapshot = await getDocs(collection(db, "showcase"));
         querySnapshot.forEach((doc) => {
-        listShowcases.value.push({...doc.data(), id: doc.id})
-    });
+            console.log(doc.id);
+            listShowcases.value.push({...doc.data(), id: doc.id})
+        });
 })
 
  const closePopup = () => {
@@ -84,6 +94,16 @@ const selectShowcase = (showcase) => {
     // console.log(showcase);
     modal.show();
     showcaseDetail.value = showcase;
-    console.log(showcaseDetail);
+    // console.log(showcaseDetail);
 };
+const editShowcase = (id) => {
+    // console.log(showcase);
+    modal.show();
+    // showcaseDetail.value = showcase;
+    // console.log(showcaseDetail);
+};
+
+const toggleShow = (data = {}, isNew = true ) => {
+    showPopup.value = !showPopup.value;
+}
 </script>
