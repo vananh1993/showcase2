@@ -4,15 +4,15 @@
 			<div class="modal-wrapper">
 				<div class="modal-container">
 					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-					<input type="text" v-model="showcase.name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+					<input type="text" v-model="showcase.title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
 					<textarea placeholder="Description" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="showcase.description"></textarea>
 
-					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag</label>
+					<!-- <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag</label>
 					<input type="text" v-model="showcase.tag" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 					<ul>
 						<li></li>
-					</ul>
+					</ul> -->
 					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thumb</label>
 					<input type="text" v-model="showcase.imgUrl" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-	import { ref, defineComponent } from 'vue'
+	import { ref, defineComponent, onMounted } from 'vue'
 	import { db } from '../firebase/index'
 	import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
 
@@ -66,28 +66,34 @@
 	defineComponent({
 		name: "AddOrUpdate"
 	})
-	const emits = defineEmits('close');
+
+	onMounted( () => {
+		showcase.value = {...showcase.value, ...props.data}
+	})
 	const showcase = ref({
-		name: '',
+		title: '',
 		description: '',
-		tag : '',
-		tags: [],
+		// tag : '',
+		// tags: [],
 		imgUrl : '',
 		videoUrl : '',
-		webUrl: ''
+		webUrl: '',
+		timestamp: Date.now()
 	})
-	 const addOrUpdate = async () => {
+	const addOrUpdate = async () => {
 		if (props.isNew) {
 			await addDoc(collection(db, "showcase"), showcase.value).then((res) => {
 				emits('close');
 			})
 		}
 		else {
-			await updateDoc(collection(db, "showcase"), showcase.value).then((res) => {
+			await updateDoc(doc(db, "showcase", props.data.id), showcase.value).then((res) => {
 				emits('close');
 			})
 		}
 	}
+	const emits = defineEmits('close');
+
 </script>
 <style lang="scss">
 	.modal-overlay {
