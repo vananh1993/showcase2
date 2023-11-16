@@ -29,6 +29,16 @@ const router = createRouter({
       name: '404',
       component: () => import('@/views/404.vue')
     },
+    {
+      path: '/register',
+      name: 'Register',
+      component: () => import('@/views/Register.vue')
+    },
+    {
+      path: '/login',
+      name: 'Signin',
+      component: () => import('@/views/Signin.vue')
+    },
     // {
     //   path: '/showcase/:category',
     //   name: 'listFromCate',
