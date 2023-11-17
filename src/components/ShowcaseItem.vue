@@ -16,10 +16,10 @@
             </li>
         </ul>
         <div class="">
-            <a href="#/" @click.prevent="emits('showPopupEdit', showcase.id)">Edit Item</a>
+            <a href="#/" v-if="isLoggedIn" @click.prevent="emits('showPopupEdit', showcase.id)">Edit Item</a>
         </div>
         <div class="">
-            <a href="#/" @click.prevent="emits('deleteItem', id)">Delete Item</a>
+            <a href="#/" v-if="isLoggedIn" @click.prevent="emits('deleteItem', id)">Delete Item</a>
         </div>
     </div>
 </template>
@@ -38,6 +38,7 @@ const props = defineProps({
         type: Object,
         default: null
     },
+    isLoggedIn: Boolean,
     title: String,
 });
 const emits = defineEmits(['selected', 'showPopupEdit', 'deleteItem']);

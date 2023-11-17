@@ -16,7 +16,10 @@
         </h1>
         <p class="text-lg ">See below our collections</p>
     </div>
-    <AddOrUpdate @close="toggleShow()" v-if="showPopup" :data="data" :isNew="isNew"/>
+    <div>
+        <AddOrUpdate @close="toggleShow()" v-if="showPopup" :data="data" :isNew="isNew"/>
+    </div>
+    
     
     <div class=" mt-8 mx-5 md:mx-10  xl:mx-20">
         <div class="mt-8 flex flex-row items-center justify-between">
@@ -41,12 +44,13 @@
         </div>
 
         <div class="mt-10 md:pl-3">
-            <button @click="toggleShow()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Showcase</button>
+            <button @click="toggleShow()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"  v-if="isLoggedIn">Add Showcase</button>
             <div class="list-showcase mt-10 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 md:gap-8 gap-4  ">
                 <!-- @showPopupEdit="editShowcase(id)" -->
                 <ShowcaseItem
                     v-for="showcase in listShowcases" 
                     :showcase="showcase" :id="showcase.id"
+                    :isLoggedIn="isLoggedIn"
                     @selected="selectShowcase(showcase)"
                     @showPopupEdit="toggleShow(showcase, false)"
                     @deleteItem="deleteShowcase(showcase.id)"
@@ -64,12 +68,14 @@
 
 <script setup>
 import { collection, getDocs, orderBy, doc, deleteDoc} from 'firebase/firestore';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import { db } from '../firebase/index'
 import { ref, onMounted } from 'vue';
 import ShowcaseModal from '@/components/Modal.vue'
 import ShowcaseItem from '@/components/ShowcaseItem.vue';
 import { initFlowbite, Modal } from 'flowbite'
 import AddOrUpdate from '@/components/AddOrUpdate.vue';
+
 
 const listShowcases = ref([]);
 let showcaseDetail = ref(null);
@@ -81,8 +87,11 @@ const data = ref({
 
 })
 const isNew = ref(true);
+let auth;
+const isLoggedIn = ref(false);
 
 onMounted (async () => {
+    auth = getAuth();
     modal = new Modal(document.getElementById('modal-showcase-detail'));
     initFlowbite();
     const querySnapshot = await getDocs(collection(db, "showcase"), orderBy("title"));
@@ -91,6 +100,16 @@ onMounted (async () => {
         // console.log(doc.id);
         listShowcases.value.push({...doc.data(), id: doc.id})
     });
+
+
+    onAuthStateChanged( auth, (user) => {
+        // console.log(isLoggedIn.value);
+        if(user) {
+            isLoggedIn.value = true;
+        } else {
+            isLoggedIn.value = false;
+        }
+    })
 })
 
  const closePopup = () => {

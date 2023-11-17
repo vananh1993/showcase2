@@ -21,7 +21,7 @@
 </template>
 <script setup>
 	import { ref } from "vue";
-	import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+	import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 	import { useRouter } from 'vue-router'
 
 	const router = useRouter()
@@ -31,8 +31,8 @@
 	const register = () => {
 		const auth = getAuth();
 		signInWithEmailAndPassword(auth, email.value, password.value).then((data) => {
-			console.log('test');
-			route.push('/');
+			// console.log('test');
+			router.push("/")
 		})
 		.catch((error) => {
 			console.log(error.code);
@@ -50,6 +50,14 @@
 		})
 	};
 	const signInWithGoogle = () => {
+		const provider = new GoogleAuthProvider();
+		signInWithPopup(getAuth(), provider)
+		.then((result) => {
+			// console.log('test');
+			router.push("/")
+		})
+		.catch((error) => {
 
+		})
 	};
 </script>
