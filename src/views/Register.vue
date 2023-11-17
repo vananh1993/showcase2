@@ -31,7 +31,7 @@
 
 	const register = () => {
 		const address = email.value.split('@').pop();
-		console.log(address);
+		// console.log(address);
 		if (address != 'dvinci.com.vn') {
 			errMsg.value = "You don't have permissions"
 			return;
