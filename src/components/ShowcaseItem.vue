@@ -1,5 +1,5 @@
 <template>
-    <div class=" list-showcase__item rounded-t overflow-hidden border-b-2 border-gray-200 hover:border-gray-400  transition duration-500 cursor-pointer overflow-hidden">
+    <div class=" list-showcase__item rounded-t overflow-hidden border-b-2 border-gray-200 hover:border-gray-400  transition duration-500 cursor-pointer overflow-hidden mb-5">
         <!-- <RouterLink  target="_blank"> -->
             <div class="" @click.prevent="emits('selected', showcase)">
                 <div>
@@ -15,12 +15,15 @@
                 <a href="#/">{{ tag }}</a>
             </li>
         </ul>
-        <div class="">
-            <a href="#/" v-if="isLoggedIn" @click.prevent="emits('showPopupEdit', showcase.id)">Edit Item</a>
+        <div class="flex mb-10">
+            <div class="">
+                <a href="#/" v-if="isLoggedIn" @click.prevent="emits('showPopupEdit', showcase.id)" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit Item</a>
+            </div>
+            <div class="">
+                <a href="#/" v-if="isLoggedIn" @click.prevent="emits('deleteItem', id)" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete Item</a>
+            </div>
         </div>
-        <div class="">
-            <a href="#/" v-if="isLoggedIn" @click.prevent="emits('deleteItem', id)">Delete Item</a>
-        </div>
+        
     </div>
 </template>
 

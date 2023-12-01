@@ -22,10 +22,11 @@
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
                     <p class="t-center">
-                        <img class="mx-auto" :src="showcase?.imgUrl" alt="" />
+                        <img class="mx-auto" v-if="!showcase?.videoUrl" :src="showcase?.imgUrl" alt="" />
+                        <video  v-if="showcase?.videoUrl" :src="showcase?.videoUrl" data-test="video-content" preload="auto" playsinline="true" loop="loop" draggable="false" class="" autoplay="autoplay"></video>
                     </p>
-                    <div class="text-justify">
-                        {{ showcase?.description }}
+                    <div class="text-justify" v-html="showcase?.description">
+                        
                     </div>
                 </div>
                 <!-- Modal footer -->
@@ -55,4 +56,10 @@
     const emits = defineEmits('close');
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+    video {
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+    }
+</style>

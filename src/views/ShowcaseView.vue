@@ -48,7 +48,7 @@
     import { RouterLink } from "vue-router"
     import { ref, onMounted, computed } from "vue";
     import Observer from '@/components/IntersectionObserver.vue';
-    import ShowcaseModal from '@/components/Modal.vue'
+    import ShowcaseModal from '@/components/ModalDetail.vue'
     import ShowcaseItem from '@/components/ShowcaseItem.vue';
     import { useShowcaseStore } from "../stores/showcases";
     const store = useShowcaseStore();

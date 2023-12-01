@@ -12,7 +12,7 @@
 
     <div class="text-center container mx-auto my-10">
         <h1 class="text-3xl section-title font-semibold text-center text-gray-800 dark:text-gray-200">
-            <!-- {{ title }} -->
+            {{ title }}
         </h1>
         <p class="text-lg ">See below our collections</p>
     </div>
@@ -71,12 +71,13 @@ import { collection, getDocs, orderBy, doc, deleteDoc} from 'firebase/firestore'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import { db } from '../firebase/index'
 import { ref, onMounted } from 'vue';
-import ShowcaseModal from '@/components/Modal.vue'
+import ShowcaseModal from '@/components/ModalDetail.vue'
 import ShowcaseItem from '@/components/ShowcaseItem.vue';
 import { initFlowbite, Modal } from 'flowbite'
 import AddOrUpdate from '@/components/AddOrUpdate.vue';
 
 
+const title = ref("List Showcase");
 const listShowcases = ref([]);
 let showcaseDetail = ref(null);
 let textTest = ref("");

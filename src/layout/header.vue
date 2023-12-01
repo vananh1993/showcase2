@@ -21,12 +21,12 @@
                     />
                 </div>
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border  rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
-                    <li>
+                    <!-- <li>
                         <li><RouterLink class="block text-white" to="/">Home</RouterLink></li>
                     </li>
                     <li>
                         <li><RouterLink class="block text-white" to="/list">Showcase</RouterLink></li>
-                    </li>
+                    </li> -->
                 </ul>
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border  rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                     <li>
