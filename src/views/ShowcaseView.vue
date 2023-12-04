@@ -23,7 +23,7 @@
                 />
             </div>
             <div class="list-tag flex items-center basis-3/4 md:ml-10 gap-2  overflow-y-auto whitespace-nowrap scrollbar">
-                <a href="#/" :class="{ active: null === activeItem}" class="px-3 py-1.5  whitespace-nowrap text-gray-500  rounded-lg bg-gray-100 rounded-lg capitalize] "  @click="selectTag(null); ; toggleActive(null)">All Showcases</a>
+                <a href="#/" :class="{ active: null === activeItem}" class="px-3 py-1.5  whitespace-nowrap text-gray-500  rounded-lg bg-gray-100 rounded-lg capitalize] "  @click="selectTag(null); toggleActive(null)">All Showcases</a>
                 <a href="#/" :class="{ active: index === activeItem}" class="px-3 py-1.5 whitespace-nowrap text-gray-500 rounded-lg bg-gray-100 rounded-lg capitalize"  v-for="(tag,index) in getShowcasesTag" @click.prevent="selectTag(tag); toggleActive(index)" >{{ tag }}</a>
             </div>
         </div>
@@ -41,6 +41,10 @@
     <button data-modal-target="modal-showcase-detail" data-modal-toggle="modal-showcase-detail" class="block hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
         Toggle modal
     </button>
+
+   
+    
+
   </div>
 </template>
 
@@ -53,6 +57,9 @@
     import { useShowcaseStore } from "../stores/showcases";
     const store = useShowcaseStore();
     import { initFlowbite, Modal } from 'flowbite'
+    import videoplayer from "./components/videoplayer";
+    import videoplayerTrack from "./components/videoplayer-track";
+
 
     const limit = 12;
 
@@ -67,6 +74,7 @@
     });
     let modal;
     let enableObserver = true;
+   
 
 
     onMounted(async () => {
@@ -112,19 +120,20 @@
         if (!enableObserver) {
             return;
         }
-
         page.value++;
-
         getItems();
     };
+
+
+    
+
+
 
     const getItems = async (reset = false) => {
         if (reset) {
             page.value = 1;
             showcases.value = [];
         }
-
-
         showcases.value = [
             ...showcases.value,
             ...(await store.getItemsByPage(page.value, search.value.keyword, search.value.tag, limit))
@@ -136,6 +145,9 @@
         return [...new Set(store.getShowcases.map((item) => item.tags).flat())];
 
     });
+
+
+
 
 </script>
 <style lang="scss" scoped media="screen">

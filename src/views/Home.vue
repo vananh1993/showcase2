@@ -64,6 +64,8 @@
         Toggle modal
     </button>
   </div>
+
+
 </template>
 
 <script setup>
@@ -75,6 +77,10 @@ import ShowcaseModal from '@/components/ModalDetail.vue'
 import ShowcaseItem from '@/components/ShowcaseItem.vue';
 import { initFlowbite, Modal } from 'flowbite'
 import AddOrUpdate from '@/components/AddOrUpdate.vue';
+
+
+
+
 
 
 const title = ref("List Showcase");
@@ -140,4 +146,8 @@ const deleteShowcase = async (id) => {
     // console.log(id);
     await deleteDoc(doc(db, "showcase", id));
 }
+
+
+
+
 </script>
