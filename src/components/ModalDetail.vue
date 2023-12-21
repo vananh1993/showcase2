@@ -144,10 +144,18 @@
     
     
 </script>
-<style lang="css" scoped>
-    video {
-    width: 50%;
-    display: block;
-    margin: 0 auto;
+<style lang="scss" scoped>
+    .videoplayer {
+        position: relative !important;
+        display: block;
+        width: 50%;
+        margin: 0 auto;
+    }
+    .videoplayer-controls {
+        position: absolute;
+        bottom: 0;
+        left: 10px;
+        width: 100%;
+        color: #fff;
     }
 </style>

@@ -6,8 +6,6 @@
       :autoplay="autoplay"
       :controls="controls"
       :loop="loop"
-      :width="width"
-      :height="height"
       :poster="poster"
       :preload="preload"
       :playsinline="true"
@@ -155,3 +153,9 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+
+video {
+    width: 100%;
+}
+</style>
