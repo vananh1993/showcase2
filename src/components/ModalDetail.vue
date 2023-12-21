@@ -2,10 +2,10 @@
     <div id="modal-showcase-detail" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative container w-full max-h-full">
             <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative bg-black text-white shadow dark:bg-gray-700">
                 <!-- Modal header -->
-                <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                <div class="flex items-start justify-between p-4  rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-whire-900">
                         test {{ showcase?.title }}
                     </h3>
                     <button
@@ -19,6 +19,11 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
+                <ul class="pb-6 pl-5 px-0">
+                    <li class="inline-block text-gray-800 mr-3 " v-for="tag in showcase?.tags">
+                        <a  class="inline-block  px-4 py-1 border rounded-full text-sm font-medium hover:bg-gray-900 mt-2" href="#/">{{ tag }}</a>
+                    </li>
+                </ul>
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
                     <div class="t-center">
@@ -148,8 +153,11 @@
     .videoplayer {
         position: relative !important;
         display: block;
-        width: 50%;
+        width: 70%;
         margin: 0 auto;
+        @media only screen and (max-width: 1200px) {
+            width: 100%;
+        }
     }
     .videoplayer-controls {
         position: absolute;

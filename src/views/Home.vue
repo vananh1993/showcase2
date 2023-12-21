@@ -8,7 +8,7 @@
 </template> -->
 
 <template>
-  <div class="mx-auto pb-20">
+  <div class="mx-auto pb-10">
 
     <div class="text-center container mx-auto my-10">
         <h1 class="text-3xl section-title font-semibold text-center text-gray-800 dark:text-gray-200">
@@ -21,7 +21,7 @@
     </div>
     
     
-    <div class=" mt-8 mx-5 md:mx-10  xl:mx-20">
+    <div class=" mt-8 mx-5 md:mx-10  xl:mx-10">
         <div class="mt-8 flex flex-row items-center justify-between">
             
             <!-- <div class="relative basis-1/4">

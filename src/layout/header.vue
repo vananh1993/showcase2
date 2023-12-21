@@ -1,12 +1,14 @@
 
 <template >
     <nav class="border-gray-200 bg-gray-900">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="/" class="flex items-center">
-                 <img alt="logo" class="logo" src="@/assets/logo.svg" width="125" />
-            </a>
+        <div class="mx-5 md:mx-10  xl:mx-10 flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="basis-2/4">
+                <a href="/" class="flex items-center">
+                     <img alt="logo" class="logo" src="@/assets/logo.svg" width="125" />
+                </a>
+            </div>
             
-            <div class="items-center justify-between  basis-3/4  w-full md:flex md:w-auto md:order-1" id="navbar-search">
+            <div class="items-center justify-between  basis-2/4  w-full md:flex md:w-auto md:order-1" id="navbar-search">
                 <div class="relative mt-3 hidden">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
