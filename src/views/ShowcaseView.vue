@@ -96,7 +96,7 @@
     let activeItem = null;
 
     const toggleActive = (i) => {
-        console.log(i);
+        // console.log(i);
         activeItem = i;
     }
     const selectTag = async (tag) => {

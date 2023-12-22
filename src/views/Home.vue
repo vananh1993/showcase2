@@ -36,16 +36,16 @@
                     class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..."
                     @keyup.enter="searchShowcases"
                 />
-            </div>
-            <div class="list-tag flex items-center basis-3/4 md:ml-10 gap-2  overflow-y-auto whitespace-nowrap scrollbar">
-                <a href="#/" :class="{ active: null === activeItem}" class="px-3 py-1.5  whitespace-nowrap text-gray-500  rounded-lg bg-gray-100 rounded-lg capitalize] "  @click="selectTag(null); ; toggleActive(null)">All Showcases</a>
-                <a href="#/" :class="{ active: index === activeItem}" class="px-3 py-1.5 whitespace-nowrap text-gray-500 rounded-lg bg-gray-100 rounded-lg capitalize"  v-for="(tag,index) in getShowcasesTag" @click.prevent="selectTag(tag); toggleActive(index)" >{{ tag }}</a>
             </div> -->
+            <div class="list-tag flex items-center md:ml-2 pb-3 gap-2  overflow-y-auto whitespace-nowrap scrollbar">
+                <a href="#/" :class="{ active: null === activeItem}" class="px-4 py-1.5  whitespace-nowrap text-gray-500  rounded-lg bg-gray-100 rounded-lg capitalize] "  @click="selectTag(null); ; toggleActive(null)">All Showcases</a>
+                <a href="#/" :class="{ active: index === activeItem}" class="px-4 py-1.5 whitespace-nowrap text-gray-500 rounded-lg bg-gray-100 rounded-lg capitalize"  v-for="(tag,index) in getTagsOfShowcases" @click.prevent="selectTag(tag); toggleActive(index)" >{{ tag }}</a>
+            </div>
         </div>
 
         <div class="mt-10 md:pl-3">
             <button @click="toggleShow()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"  v-if="isLoggedIn">Add Showcase</button>
-            <div class="list-showcase mt-10 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 md:gap-8 gap-4  ">
+            <div class="list-showcase mt-10 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 md:gap-8 gap-4  ">
                 <!-- @showPopupEdit="editShowcase(id)" -->
                 <ShowcaseItem
                     v-for="showcase in listShowcases" 
@@ -72,7 +72,7 @@
 import { collection, getDocs, orderBy, doc, deleteDoc} from 'firebase/firestore';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import { db } from '../firebase/index'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import ShowcaseModal from '@/components/ModalDetail.vue'
 import ShowcaseItem from '@/components/ShowcaseItem.vue';
 import { initFlowbite, Modal } from 'flowbite'
@@ -83,7 +83,7 @@ import AddOrUpdate from '@/components/AddOrUpdate.vue';
 
 
 
-const title = ref("List Showcase");
+const title = ref("List Showcases");
 const listShowcases = ref([]);
 let showcaseDetail = ref(null);
 let textTest = ref("");
@@ -147,7 +147,24 @@ const deleteShowcase = async (id) => {
     await deleteDoc(doc(db, "showcase", id));
 }
 
+const getTagsOfShowcases = computed(() => {
+    return [...new Set(listShowcases.value.map((item) => item.tags).flat())];
 
+
+});
 
 
 </script>
+<style  lang="scss" scoped>
+    .list-tag {
+        &::-webkit-scrollbar{
+            height: 4px;
+            width: 4px;
+            background: gray;
+        }
+        &::-webkit-scrollbar-thumb:horizontal{
+            background: #000;
+            border-radius: 10px;
+        }
+    }
+</style>

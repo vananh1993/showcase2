@@ -8,7 +8,7 @@
                 </a>
             </div>
             
-            <div class="items-center justify-between  basis-2/4  w-full md:flex md:w-auto md:order-1" id="navbar-search">
+            <div class="items-center justify-end  basis-2/4  w-full md:flex md:w-auto md:order-1" id="navbar-search">
                 <div class="relative mt-3 hidden">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -22,23 +22,23 @@
                         placeholder="Search..."
                     />
                 </div>
-                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border  rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
-                    <!-- <li>
+                <!-- <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border  rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
+                    <li>
                         <li><RouterLink class="block text-white" to="/">Home</RouterLink></li>
                     </li>
                     <li>
                         <li><RouterLink class="block text-white" to="/list">Showcase</RouterLink></li>
-                    </li> -->
-                </ul>
-                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border  rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
-                    <li>
-                        <li><RouterLink class="block text-white" to="/register"  v-if="!isLoggedIn">Sign up</RouterLink></li>
                     </li>
-                    <li>
-                        <li><RouterLink class="block text-white" to="/login"  v-if="!isLoggedIn">Log in</RouterLink></li>
+                </ul> -->
+                <ul class=" p-4 md:p-0 mt-4 text-right font-medium  rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
+                    <li class="inline-block w-auto">
+                       <RouterLink class="block text-white" to="/register"  v-if="!isLoggedIn">Sign up</RouterLink>
                     </li>
-                    <li>
-                        <li> <a href="#/" @click="handleSignOut" v-if="isLoggedIn">Sign out </a></li>
+                    <li class="inline-block w-auto pl-4">
+                        <RouterLink class="block text-white" to="/login"  v-if="!isLoggedIn">Log in</RouterLink>
+                    </li>
+                    <li class="inline-block w-auto">
+                        <a href="#/" @click="handleSignOut" v-if="isLoggedIn">Sign out </a>
                     </li>
                 </ul>
             </div>

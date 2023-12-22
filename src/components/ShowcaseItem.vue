@@ -56,6 +56,9 @@ const emits = defineEmits(['selected', 'showPopupEdit', 'deleteItem']);
                 // width: auto;
                 object-fit: cover;
                 object-position: center;
+                @media only screen and (max-width: 768px) {
+                    height: 200px;
+                }
             }
 
         }
