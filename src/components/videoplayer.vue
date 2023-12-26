@@ -1,5 +1,5 @@
 <template>
-  <div class="test-video">
+  <div>
     <video
       :src="src"
       :muted="muted"
@@ -10,7 +10,8 @@
       :preload="preload"
       :playsinline="true"
       ref="player"
-    ></video>
+      class="fss"
+    />
     <slot
       name="controls"
       :play="play"
