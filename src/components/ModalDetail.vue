@@ -155,9 +155,6 @@
         display: block;
         width: 70%;
         margin: 0 auto;
-        @media only screen and (max-width: 1200px) {
-            width: 100%;
-        }
     }
     .videoplayer-controls {
         position: absolute;

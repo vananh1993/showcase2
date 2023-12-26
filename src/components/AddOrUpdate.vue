@@ -8,11 +8,18 @@
 					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
 					<textarea placeholder="Description" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="showcase.description"></textarea>
 
-					<!-- <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag</label>
-					<input type="text" v-model="showcase.tag" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-					<ul>
-						<li></li>
-					</ul> -->
+					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag</label>
+					<input type="text" v-model="addTag" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Press Enter to add tag" @keyup.enter="addTagItem();">
+					<ul class="mb-5 list-tags">
+						<li v-for="(tag, index) in showcase.tags" class="inline-block px-3 py-1 text-sm font-small  mt-2 mr-2">
+							<span>{{ tag }}</span>
+							<span class="text-red-900 list-tags__delete" @click.prevent="deleteTag(index)">
+								<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 30 30">
+								    <path d="M 7 4 C 6.744125 4 6.4879687 4.0974687 6.2929688 4.2929688 L 4.2929688 6.2929688 C 3.9019687 6.6839688 3.9019687 7.3170313 4.2929688 7.7070312 L 11.585938 15 L 4.2929688 22.292969 C 3.9019687 22.683969 3.9019687 23.317031 4.2929688 23.707031 L 6.2929688 25.707031 C 6.6839688 26.098031 7.3170313 26.098031 7.7070312 25.707031 L 15 18.414062 L 22.292969 25.707031 C 22.682969 26.098031 23.317031 26.098031 23.707031 25.707031 L 25.707031 23.707031 C 26.098031 23.316031 26.098031 22.682969 25.707031 22.292969 L 18.414062 15 L 25.707031 7.7070312 C 26.098031 7.3170312 26.098031 6.6829688 25.707031 6.2929688 L 23.707031 4.2929688 C 23.316031 3.9019687 22.682969 3.9019687 22.292969 4.2929688 L 15 11.585938 L 7.7070312 4.2929688 C 7.5115312 4.0974687 7.255875 4 7 4 z"></path>
+								</svg>
+							</span>
+						</li>
+					</ul>
 					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thumb</label>
 					<input type="text" v-model="showcase.imgUrl" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
@@ -66,6 +73,7 @@
 	defineComponent({
 		name: "AddOrUpdate"
 	})
+	const addTag = ref();
 
 	onMounted( () => {
 		showcase.value = {...showcase.value, ...props.data}
@@ -94,6 +102,14 @@
 	}
 	const emits = defineEmits('close');
 
+
+	const addTagItem = () => {
+		// console.log(addTag.value);
+		showcase.value.tags.push(addTag.value);
+	}
+	const deleteTag = (index) => {
+		showcase.value.tags.splice(index, 1)[0];
+	}
 </script>
 <style lang="scss">
 	.modal-overlay {
@@ -126,5 +142,24 @@
 		margin: auto;
 		margin-bottom: 20px;
 		overflow: hidden;
+	}
+	.list-tags {
+		li {
+			position: relative;
+
+		}
+		&__delete {
+			position: absolute;
+			width: 15px;
+			height: 15px;
+			border: 0px;
+			top: 6px;
+			right: -5px;
+			cursor: pointer;
+			svg {
+				max-width: 100%;
+				height: auto;
+			}
+		}
 	}
 </style>

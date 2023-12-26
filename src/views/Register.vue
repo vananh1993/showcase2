@@ -41,7 +41,7 @@
 			router.push('/');
 		})
 		.catch((error) => {
-			console.log(error.code);
+			// console.log(error.code);
 			switch (error.code) {
 				case "auth/weak-password":
 					errMsg.value = "Weak password"

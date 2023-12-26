@@ -37,10 +37,10 @@
                     @keyup.enter="searchShowcases"
                 />
             </div> -->
-            <div class="list-tag flex items-center md:ml-2 pb-3 gap-2  overflow-y-auto whitespace-nowrap scrollbar">
+            <!-- <div class="list-tag flex items-center md:ml-2 pb-3 gap-2  overflow-y-auto whitespace-nowrap scrollbar">
                 <a href="#/" :class="{ active: null === activeItem}" class="px-4 py-1.5  whitespace-nowrap text-gray-500  rounded-lg bg-gray-100 rounded-lg capitalize] "  @click="selectTag(null); ; toggleActive(null)">All Showcases</a>
                 <a href="#/" :class="{ active: index === activeItem}" class="px-4 py-1.5 whitespace-nowrap text-gray-500 rounded-lg bg-gray-100 rounded-lg capitalize"  v-for="(tag,index) in getTagsOfShowcases" @click.prevent="selectTag(tag); toggleActive(index)" >{{ tag }}</a>
-            </div>
+            </div> -->
         </div>
 
         <div class="mt-10 md:pl-3">
@@ -77,10 +77,6 @@ import ShowcaseModal from '@/components/ModalDetail.vue'
 import ShowcaseItem from '@/components/ShowcaseItem.vue';
 import { initFlowbite, Modal } from 'flowbite'
 import AddOrUpdate from '@/components/AddOrUpdate.vue';
-
-
-
-
 
 
 const title = ref("List Showcases");
@@ -152,7 +148,9 @@ const getTagsOfShowcases = computed(() => {
 
 
 });
+const selectTag = (tag) => {
 
+}
 
 </script>
 <style  lang="scss" scoped>
