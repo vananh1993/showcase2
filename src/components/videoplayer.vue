@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="test-video">
     <video
       :src="src"
       :muted="muted"
@@ -10,7 +10,7 @@
       :preload="preload"
       :playsinline="true"
       ref="player"
-    />
+    ></video>
     <slot
       name="controls"
       :play="play"
@@ -41,9 +41,11 @@ const EVENTS = [
   "statechanged",
 ];
 
-export default {
-  name: "Videoplayer",
-  props: {
+
+import { ref, defineComponent, onMounted, defineProps  } from 'vue'
+
+
+const props = defineProps({
     src: { type: String, required: true },
     controls: { type: Boolean, required: false, default: false },
     loop: { type: Boolean, required: false, default: false },
@@ -53,105 +55,105 @@ export default {
     muted: { type: Boolean, required: false, default: false },
     poster: { type: String, required: false },
     preload: { type: String, required: false, default: "auto" },
-  },
-  data() {
-    return {
-      playing: false,
-      duration: 0,
-      percentagePlayed: 0,
-      videoMuted: false,
-    };
-  },
-  mounted() {
-    this.bindEvents();
+})
 
-    if (this.$refs.player.muted) {
-      this.setMuted(true);
+
+const playing = ref(false);
+const duration = ref(0);
+const percentagePlayed = ref(0);
+const videoMuted = ref(false);
+
+
+
+onMounted(async () => {
+    bindEvents();
+
+  if ($refs.player.muted) {
+    setMuted(true);
+  }
+});
+
+
+const bindEvents = () => {
+  EVENTS.forEach((event) => {
+    bindVideoEvent(event);
+  });
+}
+
+const bindVideoEvent= (which)=> {
+  const player = $refs.player;
+
+  player.addEventListener(
+    which,
+    (event) => {
+      if (which === "loadeddata") {
+        duration = player.duration;
+      }
+
+      if (which === "timeupdate") {
+        percentagePlayed =
+          (player.currentTime / player.duration) * 100;
+      }
+
+      $emit(which, { event, player: this });
     }
-  },
-  methods: {
-    bindEvents() {
-      EVENTS.forEach((event) => {
-        this.bindVideoEvent(event);
-      });
-    },
+  )
+}
 
-    bindVideoEvent(which) {
-      const player = this.$refs.player;
+const play =  () => {
+  $refs.player.play();
+  setPlaying(true);
+}
 
-      player.addEventListener(
-        which,
-        (event) => {
-          if (which === "loadeddata") {
-            this.duration = player.duration;
-          }
+const pause = () =>  {
+  $refs.player.pause();
+  setPlaying(false);
+}
 
-          if (which === "timeupdate") {
-            this.percentagePlayed =
-              (player.currentTime / player.duration) * 100;
-          }
+const togglePlay = () => {
+  if (playing) {
+    pause();
+  } else {
+    play();
+  }
+}
 
-          this.$emit(which, { event, player: this });
-        },
-        true
-      );
-    },
+const  setPlaying = (state) =>  {
+  playing = state;
+}
 
-    play() {
-      this.$refs.player.play();
-      this.setPlaying(true);
-    },
+const seekToPercentage = (percentage) => {
+  $refs.player.currentTime = (percentage / 100) * duration;
+}
 
-    pause() {
-      this.$refs.player.pause();
-      this.setPlaying(false);
-    },
+const convertTimeToDuration = (seconds) => {
+  return [parseInt((seconds / 60) % 60, 10), parseInt(seconds % 60, 10)]
+    .join(":")
+    .replace(/\b(\d)\b/g, "0$1");
+}
 
-    togglePlay() {
-      if (this.playing) {
-        this.pause();
-      } else {
-        this.play();
-      }
-    },
+const mute = () => {
+  $refs.player.muted = true;
+  setMuted(true);
+}
 
-    setPlaying(state) {
-      this.playing = state;
-    },
+const unmute = () => {
+  $refs.player.muted = false;
+  setMuted(false);
+}
 
-    seekToPercentage(percentage) {
-      this.$refs.player.currentTime = (percentage / 100) * this.duration;
-    },
+const toggleMute = () => {
+  if (videoMuted) {
+    unmute();
+  } else {
+    mute();
+  }
+}
 
-    convertTimeToDuration(seconds) {
-      return [parseInt((seconds / 60) % 60, 10), parseInt(seconds % 60, 10)]
-        .join(":")
-        .replace(/\b(\d)\b/g, "0$1");
-    },
+const setMuted = (state) => {
+  videoMuted = state;
+}
 
-    mute() {
-      this.$refs.player.muted = true;
-      this.setMuted(true);
-    },
-
-    unmute() {
-      this.$refs.player.muted = false;
-      this.setMuted(false);
-    },
-
-    toggleMute() {
-      if (this.videoMuted) {
-        this.unmute();
-      } else {
-        this.mute();
-      }
-    },
-
-    setMuted(state) {
-      this.videoMuted = state;
-    },
-  },
-};
 </script>
 <style lang="scss" scoped>
 

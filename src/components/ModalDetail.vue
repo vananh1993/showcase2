@@ -30,23 +30,23 @@
                         <img class="mx-auto" v-if="!showcase?.videoUrl" :src="showcase?.imgUrl" alt="" />
                         <!-- <video  v-if="showcase?.videoUrl" :src="showcase?.videoUrl" data-test="video-content" preload="auto" playsinline="true" loop="loop" draggable="false" class="" autoplay="autoplay"></video> -->
                         <videoplayer
-                        v-if="showcase?.videoUrl"
-                        class="videoplayer"
-                        :src="showcase?.videoUrl"
-                        :muted="true"
-                        :autoplay="true"
-                        :controls="false"
-                        :loop="true"
-                        @play="onPlayerPlay"
-                        @pause="onPlayerPause"
-                        @ended="onPlayerEnded"
-                        @loadeddata="onPlayerLoadeddata"
-                        @waiting="onPlayerWaiting"
-                        @playing="onPlayerPlaying"
-                        @timeupdate="onPlayerTimeupdate"
-                        @canplay="onPlayerCanplay"
-                        @canplaythrough="onPlayerCanplaythrough"
-                        @statechanged="playerStateChanged"
+                            v-if="showcase?.videoUrl"
+                            class="videoplayer"
+                            :src="showcase?.videoUrl"
+                            :muted="true"
+                            :autoplay="true"
+                            :controls="false"
+                            :loop="true"
+                            @play="onPlayerPlay"
+                            @pause="onPlayerPause"
+                            @ended="onPlayerEnded"
+                            @loadeddata="onPlayerLoadeddata"
+                            @waiting="onPlayerWaiting"
+                            @playing="onPlayerPlaying"
+                            @timeupdate="onPlayerTimeupdate"
+                            @canplay="onPlayerCanplay"
+                            @canplaythrough="onPlayerCanplaythrough"
+                            @statechanged="playerStateChanged"
                         >
                             <template
                                 v-slot:controls="{
@@ -60,18 +60,18 @@
                                 toggleMute,
                                 }"
                                 >
-                            <div class="videoplayer-controls">
-                                <button @click="togglePlay()" class="videoplayer-controls-toggleplay">
-                                    {{ playing ? "pause" : "play" }}
-                                </button> &nbsp;
-                                <button @click="toggleMute()" class="videoplayer-controls-togglemute">
-                                    <!-- {{ videoMuted ? "unmute" : "mute" }} -->
-                                    <svg height="24" v-if="videoMuted" fill="currentColor" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" svg-inline="" role="presentation" focusable="false" tabindex="-1" class="mute-icon"><path d="M21.414 12l2.293-2.293a1 1 0 00-1.414-1.414L20 10.586l-2.293-2.293a1 1 0 00-1.414 1.414L18.586 12l-2.293 2.293a1 1 0 101.414 1.414L20 13.414l2.293 2.293a1 1 0 001.414-1.414zM3 6a3 3 0 00-3 3v6a3 3 0 003 3h2.649L12 23V1L5.649 6z"></path></svg>
-                                    <svg height="24" v-if="!videoMuted" fill="currentColor" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" svg-inline="" role="presentation" focusable="false" tabindex="-1" class="mute-icon"><path d="M3 6a3 3 0 00-3 3v6a3 3 0 003 3h2.649L12 23V1L5.649 6zm17 6a8.251 8.251 0 00-2.271-5.686 1 1 0 00-1.454 1.374 6.253 6.253 0 010 8.626 1 1 0 101.453 1.374A8.25 8.25 0 0020 12zM18.6 1.2a1 1 0 10-1.2 1.6 11.5 11.5 0 010 18.4 1 1 0 101.2 1.6 13.5 13.5 0 000-21.6z"></path></svg>
-                                </button>
-                            </div>
-                        </template>
-                    </videoplayer>
+                                <div class="videoplayer-controls">
+                                    <button @click="togglePlay()" class="videoplayer-controls-toggleplay">
+                                        {{ playing ? "pause" : "play" }}
+                                    </button> &nbsp;
+                                    <button @click="toggleMute()" class="videoplayer-controls-togglemute">
+                                        <!-- {{ videoMuted ? "unmute" : "mute" }} -->
+                                        <svg height="24" v-if="videoMuted" fill="currentColor" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" svg-inline="" role="presentation" focusable="false" tabindex="-1" class="mute-icon"><path d="M21.414 12l2.293-2.293a1 1 0 00-1.414-1.414L20 10.586l-2.293-2.293a1 1 0 00-1.414 1.414L18.586 12l-2.293 2.293a1 1 0 101.414 1.414L20 13.414l2.293 2.293a1 1 0 001.414-1.414zM3 6a3 3 0 00-3 3v6a3 3 0 003 3h2.649L12 23V1L5.649 6z"></path></svg>
+                                        <svg height="24" v-if="!videoMuted" fill="currentColor" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" svg-inline="" role="presentation" focusable="false" tabindex="-1" class="mute-icon"><path d="M3 6a3 3 0 00-3 3v6a3 3 0 003 3h2.649L12 23V1L5.649 6zm17 6a8.251 8.251 0 00-2.271-5.686 1 1 0 00-1.454 1.374 6.253 6.253 0 010 8.626 1 1 0 101.453 1.374A8.25 8.25 0 0020 12zM18.6 1.2a1 1 0 10-1.2 1.6 11.5 11.5 0 010 18.4 1 1 0 101.2 1.6 13.5 13.5 0 000-21.6z"></path></svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </videoplayer>
                     </div>
                     <div>
                     </div>
