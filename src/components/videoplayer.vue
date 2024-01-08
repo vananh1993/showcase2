@@ -11,7 +11,7 @@
       :playsinline="true"
       ref="player"
       class="fss"
-    />
+    ></video>
     <slot
       name="controls"
       :play="play"
@@ -43,7 +43,7 @@ const EVENTS = [
 ];
 
 
-import { ref, defineComponent, onMounted, defineProps  } from 'vue'
+import { ref, onMounted, defineProps  } from 'vue'
 
 
 const props = defineProps({

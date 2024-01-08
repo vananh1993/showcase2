@@ -62,7 +62,9 @@
                                 >
                                 <div class="videoplayer-controls">
                                     <button @click="togglePlay()" class="videoplayer-controls-toggleplay">
-                                        {{ playing ? "pause" : "play" }}
+                                        <!-- {{ playing ? "pause" : "play" }} -->
+                                        <img width="26" v-if="playing" src="src/assets/img/icon/play.png">
+                                        <img width="26" v-if="!playing" src="src/assets/img/icon/pause.png">
                                     </button> &nbsp;
                                     <button @click="toggleMute()" class="videoplayer-controls-togglemute">
                                         <!-- {{ videoMuted ? "unmute" : "mute" }} -->
