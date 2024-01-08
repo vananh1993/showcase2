@@ -2,14 +2,14 @@
   <div>
     <video
       :src="src"
-      :muted="muted"
+      :muted="videoMuted"
       :autoplay="autoplay"
       :controls="controls"
       :loop="loop"
       :poster="poster"
       :preload="preload"
       :playsinline="true"
-      ref="player"
+      ref="videoRef"
       class="fss"
     ></video>
     <slot
@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 const EVENTS = [
   "play",
   "pause",
@@ -45,7 +45,18 @@ const EVENTS = [
 
 import { ref, onMounted, defineProps  } from 'vue'
 
-
+const emits = defineEmits([
+  "play",
+  "pause",
+  "ended",
+  "loadeddata",
+  "waiting",
+  "playing",
+  "timeupdate",
+  "canplay",
+  "canplaythrough",
+  "statechanged"
+]);
 const props = defineProps({
     src: { type: String, required: true },
     controls: { type: Boolean, required: false, default: false },
@@ -59,30 +70,35 @@ const props = defineProps({
 })
 
 
-const playing = ref(false);
-const duration = ref(0);
-const percentagePlayed = ref(0);
-const videoMuted = ref(false);
+const videoRef = ref();
 
-
+let playing = ref(false);
+let duration = ref(0);
+let percentagePlayed = ref(0);
+let videoMuted = ref(false);
 
 onMounted(async () => {
-    bindEvents();
-
-  if ($refs.player.muted) {
-    setMuted(true);
-  }
+  bindEvents();
 });
-
 
 const bindEvents = () => {
   EVENTS.forEach((event) => {
     bindVideoEvent(event);
   });
-}
+};
+
+const setPlaying = (state) =>  {
+  playing.value = state;
+
+  state ? videoRef.value.play() : videoRef.value.pause();
+};
+
+const instance = {
+  setPlaying,
+};
 
 const bindVideoEvent= (which)=> {
-  const player = $refs.player;
+  const player = videoRef.value;
 
   player.addEventListener(
     which,
@@ -96,35 +112,15 @@ const bindVideoEvent= (which)=> {
           (player.currentTime / player.duration) * 100;
       }
 
-      $emit(which, { event, player: this });
+      emits(which, { event, player: instance });
     }
   )
 }
 
-const play =  () => {
-  $refs.player.play();
-  setPlaying(true);
-}
-
-const pause = () =>  {
-  $refs.player.pause();
-  setPlaying(false);
-}
-
-const togglePlay = () => {
-  if (playing) {
-    pause();
-  } else {
-    play();
-  }
-}
-
-const  setPlaying = (state) =>  {
-  playing = state;
-}
+const togglePlay = () => setPlaying(!playing.value);
 
 const seekToPercentage = (percentage) => {
-  $refs.player.currentTime = (percentage / 100) * duration;
+  videoRef.value.currentTime = (percentage / 100) * duration;
 }
 
 const convertTimeToDuration = (seconds) => {
@@ -133,27 +129,9 @@ const convertTimeToDuration = (seconds) => {
     .replace(/\b(\d)\b/g, "0$1");
 }
 
-const mute = () => {
-  $refs.player.muted = true;
-  setMuted(true);
-}
+const toggleMute = () => videoMuted.value = !videoMuted.value;
 
-const unmute = () => {
-  $refs.player.muted = false;
-  setMuted(false);
-}
-
-const toggleMute = () => {
-  if (videoMuted) {
-    unmute();
-  } else {
-    mute();
-  }
-}
-
-const setMuted = (state) => {
-  videoMuted = state;
-}
+defineExpose(instance);
 
 </script>
 <style lang="scss" scoped>

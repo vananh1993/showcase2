@@ -59,7 +59,7 @@
         </div>
     </div>
     <!-- <Observer @intersect="pageExceededBottom()" /> -->
-    <ShowcaseModal :showcase="showcaseDetail"  @close="closePopup"/>
+    <ShowcaseModal :showcase="showcaseDetail" ref="modalRef" />
     <button data-modal-target="modal-showcase-detail" data-modal-toggle="modal-showcase-detail" class="block hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
         Toggle modal
     </button>
@@ -75,7 +75,7 @@ import { db } from '../firebase/index'
 import { ref, onMounted, computed } from 'vue';
 import ShowcaseModal from '@/components/ModalDetail.vue'
 import ShowcaseItem from '@/components/ShowcaseItem.vue';
-import { initFlowbite, Modal } from 'flowbite'
+import { initFlowbite } from 'flowbite'
 import AddOrUpdate from '@/components/AddOrUpdate.vue';
 
 
@@ -83,7 +83,7 @@ const title = ref("List Showcases");
 const listShowcases = ref([]);
 let showcaseDetail = ref(null);
 let textTest = ref("");
-let modal;
+const modalRef = ref();
 const showcaseUpdate = ref([]);
 const showPopup = ref(false);
 const data = ref({
@@ -95,7 +95,7 @@ const isLoggedIn = ref(false);
 
 onMounted (async () => {
     auth = getAuth();
-    modal = new Modal(document.getElementById('modal-showcase-detail'));
+    // modal = new Modal(document.getElementById('modal-showcase-detail'));
     initFlowbite();
     const querySnapshot = await getDocs(collection(db, "showcase"), orderBy("title"));
 
@@ -115,20 +115,16 @@ onMounted (async () => {
     })
 })
 
- const closePopup = () => {
-      modal.hide();
-  }
-
 
 const selectShowcase = (showcase) => {
     // console.log(showcase);
-    modal.show();
+    modalRef.value.show();
     showcaseDetail.value = showcase;
     // console.log(showcaseDetail);
 };
 const editShowcase = (id) => {
     // console.log(showcase);
-    modal.show();
+    modalRef.value.show();
     // showcaseDetail.value = showcase;
     // console.log(showcaseDetail);
 };

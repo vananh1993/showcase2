@@ -95,9 +95,9 @@
 			})
 		}
 		else {
-			await updateDoc(doc(db, "showcase", props.data.id), showcase.value).then((res) => {
+			const abc = await updateDoc(doc(db, "showcase", props.data.id), showcase.value).then((res) => {
 				emits('close');
-			})
+			});
 		}
 	}
 	const emits = defineEmits('close');
