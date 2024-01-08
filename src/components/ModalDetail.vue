@@ -11,7 +11,7 @@
                     <button
                         type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        @click.prevent="emits('close');"
+                        @click.prevent="handleCloseEvent()"
                         >
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -47,6 +47,7 @@
                             @canplay="onPlayerCanplay"
                             @canplaythrough="onPlayerCanplaythrough"
                             @statechanged="playerStateChanged"
+                            ref="video"
                         >
                             <template
                                 v-slot:controls="{
@@ -75,8 +76,7 @@
                     </div>
                     <div>
                     </div>
-                    <div class="text-justify" v-html="showcase?.description">
-                    </div>
+                    <div class="text-justify whitespace-pre-line">{{ showcase?.description }}</div>
                 </div>
                 <!-- Modal footer -->
                 <div class=" text-center  p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -87,7 +87,7 @@
                         >
                     View Demo
                     </a>
-                    <button @click.prevent="emits('close');" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+                    <button @click.prevent="handleCloseEvent()" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
                 </div>
             </div>
         </div>
@@ -95,59 +95,75 @@
 </template>
 <script setup>
     // import { ref, onMounted, computed } from "vue";
-    import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { Modal } from 'flowbite';
     
-    import videoplayer from "@/components/videoplayer.vue";
+import videoplayer from "@/components/videoplayer.vue";
     
-    
-    
-    const props = defineProps({
-        showcase: {
-            type: Object,
-            default: null
-        },
-        title: String,
-    });
-    const emits = defineEmits('close');
-    let time = ref('');
-    
-    
-    const onPlayerPlay = ({ event, player }) => {
-      // console.log(event.type);
-      player.setPlaying(true);
-    };
-    const onPlayerPause = ({ event, player }) => {
-      // console.log(event.type);
-      player.setPlaying(false);
-    };
-    const onPlayerEnded = ({ event, player }) => {
-      // console.log(event.type);
-      player.setPlaying(false);
-    };
-    const onPlayerLoadeddata = ({ event }) => {
-      // console.log(event.type);
-    };
-    const onPlayerWaiting = ({ event }) => {
-      // console.log(event.type);
-    };
-    const onPlayerPlaying = ({ event })  =>{
-      // console.log(event.type);
-    };
-    const onPlayerTimeupdate = ({ event }) => {
-      time = event.target.currentTime;
-      // console.log({ event: event.type, time: event.target.currentTime });
-    };
-    const onPlayerCanplay = ({ event }) => {
-      // console.log(event.type);
-    };
-    const onPlayerCanplaythrough = ({ event }) => {
-      // console.log(event.type);
-    };
-    const playerStateChanged = ({ event }) => {
-      // console.log(event.type);
-    }
-    
-    
+const props = defineProps({
+    showcase: {
+        type: Object,
+        default: null
+    },
+    title: String,
+});
+const emits = defineEmits('close');
+let time = ref('');
+let modal;
+let video = ref();
+
+onMounted(() => {
+    modal = new Modal(document.getElementById('modal-showcase-detail'));
+});
+
+
+const onPlayerPlay = ({ event, player }) => {
+  // console.log(event.type);
+  player.setPlaying(true);
+};
+const onPlayerPause = ({ event, player }) => {
+  // console.log(event.type);
+  player.setPlaying(false);
+};
+const onPlayerEnded = ({ event, player }) => {
+  // console.log(event.type);
+  player.setPlaying(false);
+};
+const onPlayerLoadeddata = ({ event }) => {
+  // console.log(event.type);
+};
+const onPlayerWaiting = ({ event }) => {
+  // console.log(event.type);
+};
+const onPlayerPlaying = ({ event })  =>{
+  // console.log(event.type);
+};
+const onPlayerTimeupdate = ({ event }) => {
+  time = event.target.currentTime;
+  // console.log({ event: event.type, time: event.target.currentTime });
+};
+const onPlayerCanplay = ({ event }) => {
+  // console.log(event.type);
+};
+const onPlayerCanplaythrough = ({ event }) => {
+  // console.log(event.type);
+};
+const playerStateChanged = ({ event }) => {
+  // console.log(event.type);
+}
+
+const show = () => modal.show();
+const hide = () => modal.hide();
+
+const handleCloseEvent = () => {
+    emits('close');
+    hide();
+    video.value.setPlaying(false);
+};
+
+defineExpose({
+    show, hide
+});
 </script>
 <style lang="scss" scoped>
     .videoplayer {
