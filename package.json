@@ -11,6 +11,12 @@
   },
   "dependencies": {
     "@builder.io/sdk-vue": "^0.6.2",
+    "@ckeditor/ckeditor5-build-classic": "^40.2.0",
+    "@ckeditor/ckeditor5-vue": "^5.1.0",
+    "@tiptap/pm": "^2.1.15",
+    "@tiptap/starter-kit": "^2.1.15",
+    "@tiptap/vue-3": "^2.1.15",
+    "@vueup/vue-quill": "^1.2.0",
     "axios": "^1.4.0",
     "bootstrap-vue": "^2.23.1",
     "bulma": "^0.9.4",

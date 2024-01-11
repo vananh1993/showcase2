@@ -6,9 +6,11 @@
 					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
 					<input type="text" v-model="showcase.title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-					<textarea placeholder="Description" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="showcase.description"></textarea>
+					<editor-content :editor="editor"  v-model="showcase.description"/>
 
-					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag</label>
+					<!-- <textarea placeholder="Description" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="showcase.description"></textarea> -->
+
+					<label class="block mb-2 mt-10 text-sm font-medium text-gray-900 dark:text-white">Tag</label>
 					<input type="text" v-model="addTag" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Press Enter to add tag" @keyup.enter="addTagItem();">
 					<ul class="mb-5 list-tags">
 						<li v-for="(tag, index) in showcase.tags" class="inline-block px-3 py-1 text-sm font-small  mt-2 mr-2">
@@ -20,8 +22,15 @@
 							</span>
 						</li>
 					</ul>
-					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thumb</label>
-					<input type="text" v-model="showcase.imgUrl" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+					<div class="flex flex-row items-center justify-between">
+						<div class="basis-2/4">
+							<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thumb</label>
+							<input type="text" v-model="showcase.imgUrl" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+						</div>
+						<div class="basis-1/4">
+							<img width="200" v-if="showcase.imgUrl" :src="showcase.imgUrl">
+						</div>
+					</div>
 
 					<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Video Url</label>
 					<input type="text" v-model="showcase.videoUrl" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -65,11 +74,14 @@
 	import { ref, defineComponent, onMounted } from 'vue'
 	import { db } from '../firebase/index'
 	import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
+	import { useEditor, EditorContent } from '@tiptap/vue-3'
+	import StarterKit from '@tiptap/starter-kit'
 
 	const props = defineProps({
 		data: Object,
 		isNew: Boolean,
 	})
+	
 	defineComponent({
 		name: "AddOrUpdate"
 	})
@@ -87,6 +99,14 @@
 		videoUrl : '',
 		webUrl: '',
 		timestamp: Date.now()
+	})
+
+
+	const editor = useEditor({
+	  content: showcase.value.description,
+	  extensions: [
+	    StarterKit,
+	  ],
 	})
 	const addOrUpdate = async () => {
 		if (props.isNew) {
@@ -112,6 +132,9 @@
 	}
 </script>
 <style lang="scss">
+	// body {
+	// 	overflow: hidden;
+	// }
 	.modal-overlay {
 		position: fixed;
 		top: 0;
@@ -130,7 +153,7 @@
 	}
 	.modal-container {
 		background: #fff;
-		max-width: 400px;
+		// max-width: 400px;
 		width: calc(100% - 40px);
 		margin-left: 20px;
 		margin-right: 20px;
